@@ -1,21 +1,38 @@
-# Secrets — never commit real keys
+# Secrets — never commit real keys or local credentials
 .env
+.env.*
+!.env.example
 lab/.env
+lab-creds.env
+**/credentials*.json
+**/secrets*.yaml
+**/secrets*.yml
+
+# Ephemeral key dumps / cookie jars
+*.pem
+*.key
+!vendor/**/*.key
+/tmp/
+or.key
+*.cookie
+*-cookies.txt
+
+# Dify runtime (vendored compose state)
 vendor/dify/docker/.env
+vendor/dify/docker/volumes/
+vendor/dify/docker/docker-compose.override.yml
+vendor/dify/docker/nginx/conf.d/default.conf
 
 # Runtime / local state
-vendor/dify/docker/volumes/
 *.log
 /swapfile
+agent-tools/
+.playwright/
+.cache/
 
 # OS / editor
 .DS_Store
 .idea/
 .vscode/
 *.swp
-
-agent-tools/
-
-
-lab-creds.env
-
+*~
