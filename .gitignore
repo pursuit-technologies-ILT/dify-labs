@@ -16,3 +16,6 @@ vendor/dify/docker/volumes/
 
 agent-tools/
 
+
+lab-creds.env
+
