@@ -13,11 +13,11 @@ Credentials (local lab only): see `lab-creds.env` (gitignored).
 3. Open **Studio**
 
 ### 2) Install OpenRouter (once)
-1. Open **Plugins** (puzzle icon) → Marketplace  
+1. Left nav → **Marketplace** (or Plugins)  
 2. Search **OpenRouter** (`langgenius/openrouter`) → **Install**  
-3. **Settings → Model Provider → OpenRouter**  
-4. Paste your OpenRouter API key → Save  
-5. (Optional) **Add model** → `meta-llama/llama-3.1-8b-instruct` (or `llama-3.2-1b-instruct` for cheaper tests)
+3. Left nav → **Integrations → Model Provider** (`/integrations/model-provider`)  
+4. Open **OpenRouter** → paste API key → Save  
+5. Prefer a light model for labs: `meta-llama/llama-3.1-8b-instruct` or `meta-llama/llama-3.2-1b-instruct`
 
 ### 3) Create a Chatflow (canvas)
 1. **Studio → Create from Blank → Chatflow**  
@@ -57,6 +57,8 @@ OpenRouter only appears inside **model selectors** on LLM/Agent nodes.
 | App | **Member Benefits FAQ** (`advanced-chat` / Chatflow) |
 | Graph | Start → LLM → Answer |
 | Model | `meta-llama/llama-3.1-8b-instruct` via OpenRouter |
+| Studio | http://localhost:3847/apps |
 | Editor URL | http://localhost:3847/app/2615218e-4cd3-4f56-bad4-866a62c93627/workflow |
+| Lab login | `lab-admin@example.com` / see `lab-creds.env` |
 
-Open that URL while signed in to see the canvas immediately.
+Open the editor URL while signed in to see the canvas immediately. Use **localhost** (not `127.0.0.1`) so auth cookies match the API host.
