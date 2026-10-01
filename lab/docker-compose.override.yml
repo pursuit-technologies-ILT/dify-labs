@@ -1,21 +1,13 @@
-# Merged automatically when running compose from vendor/dify/docker
-# because Compose loads docker-compose.override.yml beside docker-compose.yaml.
+# Merged automatically when running compose from vendor/dify/docker.
 #
-# Goals:
-# - Attach to shared lab_net for Open WebUI ↔ Dify
-# - Keep plugin debug port on loopback only
-# - Avoid publishing DB / Redis / Weaviate
+# Keep plugin debug on loopback. Do NOT attach api to extra networks —
+# multi-network DNS breaks redis hostname resolution in this sandbox.
+# Open WebUI reaches Dify via host port 3847 (host.docker.internal).
 
 services:
   nginx:
     networks:
       - default
-      - lab_net
-
-  api:
-    networks:
-      - default
-      - ssrf_proxy_network
       - lab_net
 
   plugin_daemon:

@@ -20,12 +20,10 @@ LAB_MODE="${LAB_MODE:-full}"
 DIFY_HOST_PORT="${DIFY_HOST_PORT:-3847}"
 OPEN_WEBUI_HOST_PORT="${OPEN_WEBUI_HOST_PORT:-3848}"
 
-# Ensure dockerd is reachable
-if ! docker info >/dev/null 2>&1; then
-  echo "Docker daemon not reachable. On this sandbox try:"
-  echo "  sudo dockerd --host=unix:///var/run/docker.sock --iptables=false &>/tmp/dockerd.log &"
-  exit 1
-fi
+"$ROOT/scripts/ensure-docker.sh"
+# Nested VM bridge ICC (safe if already present)
+sudo iptables -C FORWARD -j ACCEPT 2>/dev/null || sudo iptables -I FORWARD -j ACCEPT
+sudo iptables -C DOCKER-USER -j ACCEPT 2>/dev/null || sudo iptables -I DOCKER-USER -j ACCEPT 2>/dev/null || true
 
 "$ROOT/scripts/bootstrap.sh"
 

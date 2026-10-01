@@ -38,6 +38,7 @@ That is the whole operator loop. Everything else is scripted.
 
 ## Docs
 
+- [Curriculum refactor: n8n → Dify](docs/CURRICULUM_REFACTOR_N8N_TO_DIFY.md) — module/lab mapping for the health-insurance course
 - [Enterprise infrastructure review notes](docs/ENTERPRISE_REVIEW.md) — containers, exposure, outbound, secrets
 - [OpenRouter + trainee portal wiring](docs/OPENROUTER_AND_PORTAL.md) — plugin, API mapping, RBAC path
 - [Comparison snapshot](docs/COMPARISON.md) — Dify vs Flowise vs Open WebUI for this use case

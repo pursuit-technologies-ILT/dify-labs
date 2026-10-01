@@ -1,7 +1,5 @@
 # Open WebUI — trainee-facing ChatGPT-style portal for the lab.
-# Joins the Dify compose network so it can call Dify's OpenAI-compatible APIs.
-#
-# Started by ./scripts/up.sh when LAB_MODE=full|webui.
+# Shares lab_net with Dify (Dify override marks lab_net external once created here).
 
 services:
   open-webui:
@@ -13,15 +11,12 @@ services:
     environment:
       - WEBUI_NAME=Enterprise Training Lab
       - WEBUI_SECRET_KEY=${WEBUI_SECRET_KEY:-lab-change-me-generate-with-openssl}
-      # Allow connecting to Dify / OpenRouter from the UI after setup
       - ENABLE_OLLAMA_API=false
       - ENABLE_OPENAI_API=true
-      # Pre-wire OpenRouter as a default OpenAI-compatible backend (optional until key is set)
       - OPENAI_API_BASE_URL=${OPENAI_API_BASE_URL:-https://openrouter.ai/api/v1}
       - OPENAI_API_KEY=${OPENROUTER_API_KEY:-}
       - DEFAULT_USER_ROLE=user
       - ENABLE_SIGNUP=true
-      # First account becomes admin; turn signup off after creating trainee accounts
       - ENABLE_LOGIN_FORM=true
     volumes:
       - open-webui-data:/app/backend/data
@@ -36,4 +31,3 @@ volumes:
 networks:
   lab_net:
     name: lab_net
-    driver: bridge
