@@ -1,0 +1,18 @@
+# Secrets — never commit real keys
+.env
+lab/.env
+vendor/dify/docker/.env
+
+# Runtime / local state
+vendor/dify/docker/volumes/
+*.log
+/swapfile
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/
+*.swp
+
+agent-tools/
+
