@@ -21,7 +21,7 @@ Transforms the n8n outline into a sequenced delivery plan. Pair with [SPEC_CAPAB
 | 0.1 | Keep Compose lab reproducible (`scripts/*`, pin 1.17.1) | `./scripts/up.sh` green | Done |
 | 0.2 | OpenRouter wired; light model proven | Chat 200 with llama-3.1-8b | Done |
 | 0.3 | Sample Chatflow on canvas | Member Benefits FAQ | Done |
-| 0.4 | Durable memory + specs + links | `AGENTS.md`, `docs/*` | This change |
+| 0.4 | Durable memory + specs + links | `AGENTS.md`, `docs/*` | Done |
 | 0.5 | Create App API key for sample; store in portal secrets pattern | Key in secret store (not git) | Todo |
 | 0.6 | Custom-domain `.env` template for target site | `lab/prod.env.template` | Todo |
 | 0.7 | Re-run Context7 Dify queries when quota resets; diff vs these specs | Note in DECISIONS.md | Todo |

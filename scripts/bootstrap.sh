@@ -8,8 +8,15 @@ load_lab_env
 
 VENDOR="$LAB_ROOT/vendor/dify"
 DOCKER_DIR="$VENDOR/docker"
+OVERLAY="$LAB_ROOT/lab/dify.env.overlay"
+COMPOSE_OVERRIDE="$LAB_ROOT/lab/docker-compose.override.yml"
 
 mkdir -p "$LAB_ROOT/vendor"
+
+if [[ ! -f "$OVERLAY" || ! -f "$COMPOSE_OVERRIDE" ]]; then
+  echo "error: missing lab overlays under lab/ (dify.env.overlay, docker-compose.override.yml)" >&2
+  exit 1
+fi
 
 if [[ ! -f "$DOCKER_DIR/docker-compose.yaml" ]]; then
   echo "==> Cloning Dify ${DIFY_VERSION} (docker/ only)…"
@@ -24,13 +31,18 @@ else
   echo "==> Dify vendor present at vendor/dify (tag ${DIFY_VERSION})"
 fi
 
+if [[ ! -f "$DOCKER_DIR/.env.example" ]]; then
+  echo "error: vendor tree incomplete — missing $DOCKER_DIR/.env.example" >&2
+  exit 1
+fi
+
 # nginx override attaches to external lab_net even when Open WebUI is off
 ensure_lab_net
 
-cp "$LAB_ROOT/lab/docker-compose.override.yml" "$DOCKER_DIR/docker-compose.override.yml"
+cp "$COMPOSE_OVERRIDE" "$DOCKER_DIR/docker-compose.override.yml"
 
 cp "$DOCKER_DIR/.env.example" "$DOCKER_DIR/.env"
-apply_env_overlay "$LAB_ROOT/lab/dify.env.overlay" "$DOCKER_DIR/.env"
+apply_env_overlay "$OVERLAY" "$DOCKER_DIR/.env"
 apply_dify_host_port "$DOCKER_DIR/.env" "$DIFY_HOST_PORT"
 
 if [[ -n "${DIFY_INIT_PASSWORD:-}" ]]; then

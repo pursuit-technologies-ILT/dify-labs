@@ -58,6 +58,7 @@ Use the Self-Host index and drill into:
 
 | Doc | Path |
 |-----|------|
+| Docs index | [README.md](./README.md) |
 | Agent memory | [/AGENTS.md](../AGENTS.md) |
 | Architecture | [ARCHITECTURE.md](./ARCHITECTURE.md) |
 | Decisions | [memory/DECISIONS.md](./memory/DECISIONS.md) |
@@ -79,6 +80,6 @@ Use the Self-Host index and drill into:
 
 ## Context7
 
-- Server: Context7 MCP (`resolve-library-id`, `query-docs`)  
-- Status as of 2026-10-02: **quota exceeded** after re-auth — use official `llms.txt` until reset  
+- Server: Context7 MCP (`resolve-library-id`, `query-docs`)
+- Prefer Context7 for Dify library docs when quota allows; otherwise use https://docs.dify.ai/llms.txt and the tables above
 - When available, resolve **Dify** and query by topic (publish, chatflow nodes, knowledge, API `user`)

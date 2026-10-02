@@ -18,13 +18,25 @@ load_lab_env() {
   DIFY_VERSION="${DIFY_VERSION:-1.17.1}"
 }
 
+docker_daemon_ok() {
+  docker info >/dev/null 2>&1
+}
+
 ensure_lab_net() {
+  if ! docker_daemon_ok; then
+    echo "error: Docker daemon is not running. Try: ./scripts/ensure-docker.sh" >&2
+    return 1
+  fi
   docker network inspect lab_net >/dev/null 2>&1 || docker network create lab_net
 }
 
 # Set KEY=VAL in a dotenv file (replace existing key or append).
 set_env_kv() {
   local file="$1" key="$2" val="$3" esc_val
+  if [[ ! -f "$file" ]]; then
+    echo "error: dotenv file not found: $file" >&2
+    return 1
+  fi
   esc_val=$(printf '%s\n' "$val" | sed -e 's/[\/&]/\\&/g')
   if grep -qE "^${key}=" "$file"; then
     sed -i -E "s|^${key}=.*|${key}=${esc_val}|" "$file"
@@ -36,6 +48,14 @@ set_env_kv() {
 # Apply non-comment KEY=VAL lines from an overlay file onto a target dotenv.
 apply_env_overlay() {
   local overlay="$1" target="$2" line key val
+  if [[ ! -f "$overlay" ]]; then
+    echo "error: overlay not found: $overlay" >&2
+    return 1
+  fi
+  if [[ ! -f "$target" ]]; then
+    echo "error: target dotenv not found: $target" >&2
+    return 1
+  fi
   while IFS= read -r line || [[ -n "$line" ]]; do
     [[ -z "$line" || "$line" =~ ^# ]] && continue
     key="${line%%=*}"
@@ -54,4 +74,12 @@ apply_dify_host_port() {
   done
   set_env_kv "$docker_env" ENDPOINT_URL_TEMPLATE "http://localhost:${port}/e/{hook_id}"
   set_env_kv "$docker_env" NEXT_PUBLIC_SOCKET_URL "ws://localhost:${port}"
+}
+
+# Probe one URL; prints "<url> -> <code|down>" and never fails the caller.
+probe_http() {
+  local url="$1" code
+  code=$(curl -s -o /dev/null -w '%{http_code}' --max-time 3 "$url" 2>/dev/null || true)
+  [[ -z "$code" || "$code" == "000" ]] && code="down"
+  echo "  ${url} -> ${code}"
 }

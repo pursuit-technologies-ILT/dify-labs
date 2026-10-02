@@ -2,7 +2,7 @@
 
 Grounded in the official Dify documentation index ([docs.dify.ai/llms.txt](https://docs.dify.ai/llms.txt)) and this lab’s running CE 1.17.1 instance.
 
-> **Context7:** Attempted; monthly quota exceeded after MCP auth. Specs below use the official Self-Host docs index + API guides instead. Re-query Context7 when quota resets (`/langgenius/dify` or resolve via Context7).
+> Prefer Context7 for Dify library docs when quota allows. If Context7 is unavailable, use the official Self-Host docs index and the links in [REFERENCE_LINKS.md](./REFERENCE_LINKS.md).
 
 ## 1. Product surfaces we will use
 

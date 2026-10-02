@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Bring up the lab stack. Requires Docker. Operator keys live in /.env only.
+# Bring up the lab stack. Requires Docker. Operator keys live in repo .env only.
 set -euo pipefail
 
 # shellcheck source=lib.sh
@@ -12,6 +12,14 @@ fi
 
 load_lab_env
 cd "$LAB_ROOT"
+
+case "$LAB_MODE" in
+  full | dify | webui) ;;
+  *)
+    echo "error: unknown LAB_MODE=$LAB_MODE (use full|dify|webui)" >&2
+    exit 1
+    ;;
+esac
 
 "$LAB_ROOT/scripts/ensure-docker.sh"
 "$LAB_ROOT/scripts/bootstrap.sh"
@@ -40,10 +48,6 @@ case "$LAB_MODE" in
     ;;
   webui)
     start_webui
-    ;;
-  *)
-    echo "Unknown LAB_MODE=$LAB_MODE (use full|dify|webui)"
-    exit 1
     ;;
 esac
 

@@ -40,3 +40,9 @@ Append-only. Newest at bottom.
 - **Why:** Dual URL sources in overlay + root `.env` were brittle; default `full` started optional Open WebUI against the portal-BFF tenancy decision; overlapping docs hid the operator path.
 - **Not changed:** Dify CE pin, OpenRouter keys-only, portal BFF `user=` tenancy, Open WebUI compose file (opt-in via `LAB_MODE=full`).
 - **Refs:** `docs/ARCHITECTURE.md`, `scripts/lib.sh`
+
+## 2026-10-02 — Craft / publish readiness
+
+- **Decision:** Treat README + `docs/README.md` as the public-repo front door. Status/down scripts fail soft when Docker is unavailable; boundary checks live in `scripts/lib.sh`. Do not add a separate `docs/CRAFT.md`.
+- **Why:** manutej/craft (robustness-at-boundaries, right-sized-design, naming): operators need clear errors and a short docs hierarchy, not another standards file.
+- **Refs:** `README.md`, `docs/README.md`, `scripts/status.sh`, `scripts/lib.sh`
