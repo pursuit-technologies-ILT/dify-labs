@@ -1,6 +1,8 @@
-# Enterprise AI Training Lab (Dify + Open WebUI)
+# Enterprise AI Training Lab (Dify)
 
-Self-hosted **Dify Community Edition 1.17.1** for enterprise training, with optional **Open WebUI**. Models go through **OpenRouter** (operator keys only). Students authenticate in your portal; the portal BFF calls Dify’s Service API with `user=student:<id>`.
+Self-hosted **[Dify](https://dify.ai) Community Edition 1.17.1** for enterprise **no-code agentic AI** training — a practical **n8n replacement** for visual Chatflows/Workflows, with **OpenRouter** models (operator keys only) and a **portal BFF** path so students never need a Studio login.
+
+Optional Open WebUI is available for demos; it is not the class delivery path.
 
 ## Quickstart
 
@@ -45,10 +47,22 @@ Models    →  OpenRouter plugin (lab)  /  internal gateway (prod)
 
 Full topology, compose footprint, and scale notes: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
 
+## Why this lab
+
+| Need | Approach here |
+|------|----------------|
+| Replace unapproved n8n | Dify Chatflow / Workflow / Agent canvas |
+| One student login | Existing portal → BFF → App API + `user=` |
+| Lab models without many vendor keys | OpenRouter plugin (`langgenius/openrouter`) |
+| Reproducible instructor materials | Vibium + Chrome screenshot protocol |
+| Lean laptop RAM | Default `LAB_MODE=dify`, worker counts = 1 |
+
 ## Docs map
 
 | Start here | Path |
 |------------|------|
+| **Handoff (share this)** | [docs/HANDOFF.md](docs/HANDOFF.md) |
+| Public GitHub publish steps | [docs/PUBLIC_REPO.md](docs/PUBLIC_REPO.md) |
 | Agent / project memory | [AGENTS.md](AGENTS.md) |
 | Docs index | [docs/README.md](docs/README.md) |
 | Architecture | [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) |
@@ -56,7 +70,6 @@ Full topology, compose footprint, and scale notes: [docs/ARCHITECTURE.md](docs/A
 | Delivery action plan | [docs/ACTION_PLAN_COURSE_DELIVERY.md](docs/ACTION_PLAN_COURSE_DELIVERY.md) |
 | Deploy + student tenancy | [docs/DEPLOY_AND_STUDENT_TENANCY.md](docs/DEPLOY_AND_STUDENT_TENANCY.md) |
 | Decision log | [docs/memory/DECISIONS.md](docs/memory/DECISIONS.md) |
-| Reference links | [docs/REFERENCE_LINKS.md](docs/REFERENCE_LINKS.md) |
 | Screenshot protocol (Vibium) | [docs/SCREENSHOT_PROTOCOL.md](docs/SCREENSHOT_PROTOCOL.md) |
 | Lab shot list | [docs/lab-materials/SHOT_LIST.md](docs/lab-materials/SHOT_LIST.md) |
 
@@ -67,6 +80,8 @@ Never commit real keys or local credentials. Already gitignored:
 - `.env` (copy from `.env.example`)
 - `lab-creds.env` (local admin notes)
 - `vendor/dify/docker/.env`, `volumes/`, and generated override copies
+- `artifacts/screenshots/` bulk runs (regenerate with the capture script)
+- `tools/vibium/node_modules/`
 
 Rotate placeholder secrets in `lab/dify.env.overlay` before any shared or production use.
 

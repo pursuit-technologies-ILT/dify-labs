@@ -6,6 +6,8 @@ Read in this order when onboarding or publishing the repo.
 
 | Layer | Doc | Purpose |
 |-------|-----|---------|
+| 0. Handoff | [HANDOFF.md](HANDOFF.md) | Shareable continuity: run, architecture, tenancy, screenshots, next steps |
+| 0b. Public repo | [PUBLIC_REPO.md](PUBLIC_REPO.md) | How to publish a public GitHub showcase under `manutej` |
 | 1. Memory | [../AGENTS.md](../AGENTS.md) | Non-negotiables, stack roles, ops commands |
 | 2. Architecture | [ARCHITECTURE.md](ARCHITECTURE.md) | Topology, compose footprint, scale, secrets |
 | 3. Spec | [SPEC_CAPABILITIES.md](SPEC_CAPABILITIES.md) | What Dify CE delivers for this course |

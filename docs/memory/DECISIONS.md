@@ -54,3 +54,11 @@ Append-only. Newest at bottom.
 - **Outputs:** `artifacts/screenshots/` (gitignored bulk + manifest), curated mirrors under `docs/lab-materials/screenshots/`, optional copy to `/opt/cursor/artifacts/screenshots/`.
 - **Constraints unchanged:** Dify CE 1.17.1, `localhost` (not `127.0.0.1`) for Studio cookies, OpenRouter keys-only, portal BFF tenancy, no secrets in git.
 - **Refs:** `docs/SCREENSHOT_PROTOCOL.md`, `tools/vibium/`, `scripts/screenshots/capture-lab.sh`
+
+## 2026-10-02 — Handoff + public showcase repo
+
+- **Decision:** Ship continuity as in-repo `docs/HANDOFF.md` (+ `docs/PUBLIC_REPO.md`); keep README as the public front door. Prefer GitHub **public** under owner `manutej` named `dify-training-lab` for showcase.
+- **Why:** User asked for a shareable handoff and a public org/user repo. Evidence: Origin/Cursor remote `manutej/tmp-*`, GitHub user `manutej` (personal account; orgs list empty), email `manutej@gmail.com`.
+- **Blocker (agent session):** `gh` unauthenticated; Origin token scoped to temp private repo (cannot `origin repo create`); Origin visibility has no `public`; no GitHub SSH. Documented unblock steps in `docs/PUBLIC_REPO.md`.
+- **Also:** Vercel Publish button hidden — Docker Compose lab is not a Vercel web app.
+- **Refs:** `docs/HANDOFF.md`, `docs/PUBLIC_REPO.md`, `README.md`

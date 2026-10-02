@@ -33,6 +33,8 @@ This repo is an **enterprise training lab** that replaces **n8n** with **self-ho
 
 | Doc | Purpose |
 |-----|---------|
+| [docs/HANDOFF.md](docs/HANDOFF.md) | Shareable handoff (run, tenancy, screenshots, next steps) |
+| [docs/PUBLIC_REPO.md](docs/PUBLIC_REPO.md) | Publish public GitHub showcase under manutej |
 | [docs/README.md](docs/README.md) | Docs index / hierarchy |
 | [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | Topology, ops boundaries, scale |
 | [docs/SPEC_CAPABILITIES.md](docs/SPEC_CAPABILITIES.md) | What Dify CE can do for this course |
