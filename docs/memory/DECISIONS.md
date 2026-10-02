@@ -46,3 +46,11 @@ Append-only. Newest at bottom.
 - **Decision:** Treat README + `docs/README.md` as the public-repo front door. Status/down scripts fail soft when Docker is unavailable; boundary checks live in `scripts/lib.sh`. Do not add a separate `docs/CRAFT.md`.
 - **Why:** manutej/craft (robustness-at-boundaries, right-sized-design, naming): operators need clear errors and a short docs hierarchy, not another standards file.
 - **Refs:** `README.md`, `docs/README.md`, `scripts/status.sh`, `scripts/lib.sh`
+
+## 2026-10-02 — Lab screenshots via Vibium + Chrome
+
+- **Decision:** Use **Vibium** (npm `vibium@26.8.21`) driving **Chrome** from the terminal as the durable screenshot tool for proof shots and instructor “what to click” materials. Entry point: `./scripts/screenshots/capture-lab.sh` → `tools/vibium/capture-lab.js`. Protocol: `docs/SCREENSHOT_PROTOCOL.md`; module list: `docs/lab-materials/SHOT_LIST.md`.
+- **Why:** User/instructor requirement for Vibium + Chrome; zero-config BiDi automation; regenerable PNGs without committing large binary dumps. Playwright remains an explicit fallback only if Vibium cannot launch Chrome.
+- **Outputs:** `artifacts/screenshots/` (gitignored bulk + manifest), curated mirrors under `docs/lab-materials/screenshots/`, optional copy to `/opt/cursor/artifacts/screenshots/`.
+- **Constraints unchanged:** Dify CE 1.17.1, `localhost` (not `127.0.0.1`) for Studio cookies, OpenRouter keys-only, portal BFF tenancy, no secrets in git.
+- **Refs:** `docs/SCREENSHOT_PROTOCOL.md`, `tools/vibium/`, `scripts/screenshots/capture-lab.sh`

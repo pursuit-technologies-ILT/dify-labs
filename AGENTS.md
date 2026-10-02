@@ -42,6 +42,7 @@ This repo is an **enterprise training lab** that replaces **n8n** with **self-ho
 | [docs/DEPLOY_AND_STUDENT_TENANCY.md](docs/DEPLOY_AND_STUDENT_TENANCY.md) | Custom domain + portal BFF tenancy |
 | [docs/HOW_TO_OPENROUTER_CANVAS.md](docs/HOW_TO_OPENROUTER_CANVAS.md) | Builder click path |
 | [docs/memory/DECISIONS.md](docs/memory/DECISIONS.md) | Decision log |
+| [docs/SCREENSHOT_PROTOCOL.md](docs/SCREENSHOT_PROTOCOL.md) | Vibium + Chrome screenshot capture |
 
 ## Ops commands
 
@@ -50,6 +51,7 @@ cp .env.example .env          # OPENROUTER_API_KEY=
 ./scripts/ensure-docker.sh
 ./scripts/up.sh
 ./scripts/status.sh
+./scripts/screenshots/capture-lab.sh   # regenerate lab PNGs (needs lab-creds.env for Studio)
 ```
 
 ## Context7 note

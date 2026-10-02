@@ -57,6 +57,8 @@ Full topology, compose footprint, and scale notes: [docs/ARCHITECTURE.md](docs/A
 | Deploy + student tenancy | [docs/DEPLOY_AND_STUDENT_TENANCY.md](docs/DEPLOY_AND_STUDENT_TENANCY.md) |
 | Decision log | [docs/memory/DECISIONS.md](docs/memory/DECISIONS.md) |
 | Reference links | [docs/REFERENCE_LINKS.md](docs/REFERENCE_LINKS.md) |
+| Screenshot protocol (Vibium) | [docs/SCREENSHOT_PROTOCOL.md](docs/SCREENSHOT_PROTOCOL.md) |
+| Lab shot list | [docs/lab-materials/SHOT_LIST.md](docs/lab-materials/SHOT_LIST.md) |
 
 ## What not to commit
 
@@ -79,6 +81,7 @@ Rotate placeholder secrets in `lab/dify.env.overlay` before any shared or produc
 ```bash
 ./scripts/status.sh   # containers + HTTP probes (fail-soft if Docker is down)
 ./scripts/down.sh     # stop Dify + Open WebUI if present
+./scripts/screenshots/capture-lab.sh   # Vibium + Chrome proof / worksheet PNGs
 ```
 
 Pinned Dify release: **1.17.1** (`vendor/DIFY_VERSION`, official `docker/` tree under `vendor/dify`).

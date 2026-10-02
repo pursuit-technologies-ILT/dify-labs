@@ -30,6 +30,13 @@ agent-tools/
 .playwright/
 .cache/
 
+# Screenshot bulk runs (regenerate with ./scripts/screenshots/capture-lab.sh)
+artifacts/screenshots/
+# Keep curated worksheet mirrors under docs/lab-materials/screenshots/ tracked when small
+
+# Vibium local install under tools/vibium (commit sources + lockfile; not node_modules)
+tools/vibium/node_modules/
+
 # OS / editor
 .DS_Store
 .idea/

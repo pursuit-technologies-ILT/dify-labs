@@ -13,6 +13,7 @@ Read in this order when onboarding or publishing the repo.
 | 5. Tenancy | [DEPLOY_AND_STUDENT_TENANCY.md](DEPLOY_AND_STUDENT_TENANCY.md) | Custom domain + portal BFF `user=` |
 | 6. Decisions | [memory/DECISIONS.md](memory/DECISIONS.md) | Append-only decision log |
 | 7. Links | [REFERENCE_LINKS.md](REFERENCE_LINKS.md) | Canonical Dify / OpenRouter / lab URLs |
+| 8. Screenshots | [SCREENSHOT_PROTOCOL.md](SCREENSHOT_PROTOCOL.md) | Vibium + Chrome capture for lab materials |
 
 ## Supporting
 
@@ -21,6 +22,7 @@ Read in this order when onboarding or publishing the repo.
 | [CURRICULUM_REFACTOR_N8N_TO_DIFY.md](CURRICULUM_REFACTOR_N8N_TO_DIFY.md) | Module/lab mapping from the n8n outline |
 | [COURSE_DESCRIPTION_DIFY.md](COURSE_DESCRIPTION_DIFY.md) | LMS blurb (Dify edition) |
 | [HOW_TO_OPENROUTER_CANVAS.md](HOW_TO_OPENROUTER_CANVAS.md) | Builder click path for OpenRouter |
+| [lab-materials/SHOT_LIST.md](lab-materials/SHOT_LIST.md) | Module shot list + caption style |
 
 ## Ops scripts (repo root)
 
@@ -30,5 +32,6 @@ Read in this order when onboarding or publishing the repo.
 | `scripts/bootstrap.sh` | Vendor Dify + apply `lab/` overlays |
 | `scripts/up.sh` / `down.sh` / `status.sh` | Start / stop / probe |
 | `scripts/lib.sh` | Shared env / overlay helpers |
+| `scripts/screenshots/capture-lab.sh` | Vibium + Chrome lab screenshots |
 
 Default `LAB_MODE=dify`. Ports **3847** (Dify) and **3848** (Open WebUI).

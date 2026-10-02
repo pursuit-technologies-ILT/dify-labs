@@ -1,0 +1,17 @@
+{
+  "name": "lab-vibium-screenshots",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Vibium + Chrome screenshot capture for the Dify lab",
+  "type": "commonjs",
+  "scripts": {
+    "capture": "node capture-lab.js",
+    "install-browser": "npx vibium install || true"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "vibium": "26.8.21"
+  }
+}
