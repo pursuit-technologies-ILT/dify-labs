@@ -34,8 +34,8 @@ Credentials (local lab only): see `lab-creds.env` (gitignored).
 6. **Preview** in the right panel, then **Publish**
 
 ### 5) Trainee-facing view
-- Use the App’s published web UI, **or**  
-- Point Open WebUI (http://localhost:3848) at the App’s OpenAI-compatible API (`/v1` + App API key)
+- **Class default:** portal BFF → Service API with `user=student:<id>` (see [DEPLOY_AND_STUDENT_TENANCY.md](./DEPLOY_AND_STUDENT_TENANCY.md)).
+- Optional App web UI, or Open WebUI at http://localhost:3848 with URL `http://host.docker.internal:3847/v1` and the App API key (`LAB_MODE=full`).
 
 ## What you can still drag (unchanged with OpenRouter)
 

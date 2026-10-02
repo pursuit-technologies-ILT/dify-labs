@@ -52,13 +52,14 @@ Use the Self-Host index and drill into:
 | Platform | Link |
 |----------|------|
 | Flowise | https://flowiseai.com |
-| Comparison notes in-repo | [COMPARISON.md](./COMPARISON.md) |
+| Lab comparison / topology | [ARCHITECTURE.md](./ARCHITECTURE.md) |
 
 ## In-repo durable docs
 
 | Doc | Path |
 |-----|------|
 | Agent memory | [/AGENTS.md](../AGENTS.md) |
+| Architecture | [ARCHITECTURE.md](./ARCHITECTURE.md) |
 | Decisions | [memory/DECISIONS.md](./memory/DECISIONS.md) |
 | Capabilities spec | [SPEC_CAPABILITIES.md](./SPEC_CAPABILITIES.md) |
 | Curriculum map | [CURRICULUM_REFACTOR_N8N_TO_DIFY.md](./CURRICULUM_REFACTOR_N8N_TO_DIFY.md) |
@@ -66,8 +67,6 @@ Use the Self-Host index and drill into:
 | Delivery action plan | [ACTION_PLAN_COURSE_DELIVERY.md](./ACTION_PLAN_COURSE_DELIVERY.md) |
 | Deploy + tenancy | [DEPLOY_AND_STUDENT_TENANCY.md](./DEPLOY_AND_STUDENT_TENANCY.md) |
 | OpenRouter canvas how-to | [HOW_TO_OPENROUTER_CANVAS.md](./HOW_TO_OPENROUTER_CANVAS.md) |
-| Enterprise review | [ENTERPRISE_REVIEW.md](./ENTERPRISE_REVIEW.md) |
-| Portal wiring | [OPENROUTER_AND_PORTAL.md](./OPENROUTER_AND_PORTAL.md) |
 
 ## Lab runtime bookmarks
 

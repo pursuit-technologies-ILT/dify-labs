@@ -1,44 +1,33 @@
 #!/usr/bin/env bash
-# Bring up the lab stack. Requires Docker. You only need keys in /.env.
+# Bring up the lab stack. Requires Docker. Operator keys live in /.env only.
 set -euo pipefail
 
-ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-cd "$ROOT"
+# shellcheck source=lib.sh
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/lib.sh"
 
-if [[ ! -f "$ROOT/.env" ]]; then
+if [[ ! -f "$LAB_ROOT/.env" ]]; then
   echo "No .env found. Creating from .env.example — add OPENROUTER_API_KEY when ready."
-  cp "$ROOT/.env.example" "$ROOT/.env"
+  cp "$LAB_ROOT/.env.example" "$LAB_ROOT/.env"
 fi
 
-# shellcheck disable=SC1091
-set -a
-# shellcheck source=/dev/null
-source "$ROOT/.env"
-set +a
+load_lab_env
+cd "$LAB_ROOT"
 
-LAB_MODE="${LAB_MODE:-full}"
-DIFY_HOST_PORT="${DIFY_HOST_PORT:-3847}"
-OPEN_WEBUI_HOST_PORT="${OPEN_WEBUI_HOST_PORT:-3848}"
-
-"$ROOT/scripts/ensure-docker.sh"
-# Nested VM bridge ICC (safe if already present)
-sudo iptables -C FORWARD -j ACCEPT 2>/dev/null || sudo iptables -I FORWARD -j ACCEPT
-sudo iptables -C DOCKER-USER -j ACCEPT 2>/dev/null || sudo iptables -I DOCKER-USER -j ACCEPT 2>/dev/null || true
-
-"$ROOT/scripts/bootstrap.sh"
+"$LAB_ROOT/scripts/ensure-docker.sh"
+"$LAB_ROOT/scripts/bootstrap.sh"
 
 start_dify() {
   echo "==> Starting Dify (port ${DIFY_HOST_PORT})…"
   (
-    cd "$ROOT/vendor/dify/docker"
+    cd "$LAB_ROOT/vendor/dify/docker"
     docker compose up -d
   )
 }
 
 start_webui() {
   echo "==> Starting Open WebUI (port ${OPEN_WEBUI_HOST_PORT})…"
-  docker network inspect lab_net >/dev/null 2>&1 || docker network create lab_net
-  docker compose -f "$ROOT/docker-compose.open-webui.yml" --env-file "$ROOT/.env" up -d
+  ensure_lab_net
+  docker compose -f "$LAB_ROOT/docker-compose.open-webui.yml" --env-file "$LAB_ROOT/.env" up -d
 }
 
 case "$LAB_MODE" in
@@ -60,14 +49,14 @@ esac
 
 echo
 echo "==> Lab is coming up."
-"$ROOT/scripts/status.sh" || true
+"$LAB_ROOT/scripts/status.sh" || true
 echo
 echo "URLs:"
 [[ "$LAB_MODE" == "full" || "$LAB_MODE" == "dify" ]] && echo "  Dify install/admin:  http://localhost:${DIFY_HOST_PORT}/install"
-[[ "$LAB_MODE" == "full" || "$LAB_MODE" == "webui" ]] && echo "  Open WebUI (trainees): http://localhost:${OPEN_WEBUI_HOST_PORT}"
+[[ "$LAB_MODE" == "full" || "$LAB_MODE" == "webui" ]] && echo "  Open WebUI (optional): http://localhost:${OPEN_WEBUI_HOST_PORT}"
 echo
 echo "After Dify is healthy:"
 echo "  1. Create admin at /install"
 echo "  2. Install OpenRouter plugin (Marketplace) and paste OPENROUTER_API_KEY"
-echo "  3. Build an App, publish API, point Open WebUI at Dify's OpenAI-compatible endpoint"
-echo "  See docs/OPENROUTER_AND_PORTAL.md"
+echo "  3. Publish an App; portal BFF calls Service API with user=student:<id>"
+echo "  Optional demo chat: LAB_MODE=full and docs/HOW_TO_OPENROUTER_CANVAS.md"

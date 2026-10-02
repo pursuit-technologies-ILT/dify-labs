@@ -33,6 +33,7 @@ This repo is an **enterprise training lab** that replaces **n8n** with **self-ho
 
 | Doc | Purpose |
 |-----|---------|
+| [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | Topology, ops boundaries, scale |
 | [docs/SPEC_CAPABILITIES.md](docs/SPEC_CAPABILITIES.md) | What Dify CE can do for this course |
 | [docs/REFERENCE_LINKS.md](docs/REFERENCE_LINKS.md) | Canonical Dify + lab reference links |
 | [docs/ACTION_PLAN_COURSE_DELIVERY.md](docs/ACTION_PLAN_COURSE_DELIVERY.md) | Phased delivery plan for the outline |

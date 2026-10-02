@@ -109,10 +109,10 @@ cp .env.example .env   # paste OPENROUTER_API_KEY
 ./scripts/ensure-docker.sh
 ./scripts/up.sh
 # Builders:  http://localhost:3847/install
-# Trainees:  http://localhost:3848
+# Optional demo chat: LAB_MODE=full → http://localhost:3848
 ```
 
-See [OPENROUTER_AND_PORTAL.md](./OPENROUTER_AND_PORTAL.md) for wiring Apps into Open WebUI.
+See [ARCHITECTURE.md](./ARCHITECTURE.md) for Open WebUI wiring; [HOW_TO_OPENROUTER_CANVAS.md](./HOW_TO_OPENROUTER_CANVAS.md) for the builder click path.
 
 ## Delivery plan & specs
 

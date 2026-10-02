@@ -7,7 +7,7 @@ Append-only. Newest at bottom.
 - **Decision:** Use **Dify Community Edition** as the n8n replacement for enterprise training.
 - **Why:** Visual builder + published Apps + RAG + logs; privatizable via Docker Compose; cleaner trainee surfaces than n8n.
 - **Alternatives considered:** Flowise (lighter, weak RBAC); Open WebUI alone (great chat UX, weak visual workflow IDE).
-- **Refs:** `docs/COMPARISON.md`, `docs/ENTERPRISE_REVIEW.md`
+- **Refs:** `docs/ARCHITECTURE.md`
 
 ## 2026-10-01 — Model access
 
@@ -33,3 +33,10 @@ Append-only. Newest at bottom.
 
 - **Decision:** Treat https://docs.dify.ai/llms.txt as the canonical docs index for specs. Context7 is preferred when available; if quota-blocked, use the official index directly.
 - **Pinned product version in lab:** Dify **1.17.1**.
+
+## 2026-10-02 — Ops / architecture trim
+
+- **Decision:** Keep five ops scripts + shared `scripts/lib.sh`. Default `LAB_MODE=dify`. Host port/URLs driven only by `DIFY_HOST_PORT`. Consolidate comparison / enterprise review / portal wiring into `docs/ARCHITECTURE.md`.
+- **Why:** Dual URL sources in overlay + root `.env` were brittle; default `full` started optional Open WebUI against the portal-BFF tenancy decision; overlapping docs hid the operator path.
+- **Not changed:** Dify CE pin, OpenRouter keys-only, portal BFF `user=` tenancy, Open WebUI compose file (opt-in via `LAB_MODE=full`).
+- **Refs:** `docs/ARCHITECTURE.md`, `scripts/lib.sh`

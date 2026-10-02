@@ -1,6 +1,6 @@
 # Enterprise AI Training Lab (Dify + Open WebUI)
 
-Self-hosted lab for investigating **Dify Community Edition** as an enterprise training portal, with optional **Open WebUI** as the trainee chat front end. Models go through **OpenRouter** (you only paste keys).
+Self-hosted lab for **Dify Community Edition** as an enterprise training backend, with optional **Open WebUI**. Models go through **OpenRouter** (operator keys only).
 
 ## What you do
 
@@ -14,9 +14,8 @@ Self-hosted lab for investigating **Dify Community Edition** as an enterprise tr
    ./scripts/ensure-docker.sh   # sandbox only (no systemd)
    ./scripts/up.sh
    ```
-3. Open:
-   - **Dify** (builders / admins): http://localhost:3847/install
-   - **Open WebUI** (trainees): http://localhost:3848
+3. Open **Dify**: http://localhost:3847/install  
+   Optional Open WebUI (`LAB_MODE=full`): http://localhost:3848
 
 That is the whole operator loop. Everything else is scripted.
 
@@ -24,8 +23,8 @@ That is the whole operator loop. Everything else is scripted.
 
 | Mode | Services | When to use |
 |------|----------|-------------|
-| `full` (default) | Dify + Open WebUI | Training portal investigation |
-| `dify` | Dify only | Infra / compose review |
+| `dify` (default) | Dify only | Class delivery / lean RAM |
+| `full` | Dify + Open WebUI | Optional ChatGPT-style demo |
 | `webui` | Open WebUI only | Light chat UI smoke test |
 
 ## Ports (intentionally non-default)
@@ -38,15 +37,15 @@ That is the whole operator loop. Everything else is scripted.
 
 ## Docs
 
-- [AGENTS.md](AGENTS.md) — long-term agent/project memory
-- [Capability spec](docs/SPEC_CAPABILITIES.md) — what Dify CE can deliver for this course
-- [Action plan: course delivery](docs/ACTION_PLAN_COURSE_DELIVERY.md) — phased plan for the outline
-- [Reference links](docs/REFERENCE_LINKS.md) — canonical Dify / OpenRouter / lab URLs
-- [Decision log](docs/memory/DECISIONS.md) — durable decisions
-- [Curriculum refactor: n8n → Dify](docs/CURRICULUM_REFACTOR_N8N_TO_DIFY.md) — module/lab mapping
-- [How to: OpenRouter + drag-and-drop canvas](docs/HOW_TO_OPENROUTER_CANVAS.md) — builder click path
-- [Deploy + student tenancy](docs/DEPLOY_AND_STUDENT_TENANCY.md) — custom domain + portal BFF
-- [Enterprise review](docs/ENTERPRISE_REVIEW.md) · [Portal wiring](docs/OPENROUTER_AND_PORTAL.md) · [Comparison](docs/COMPARISON.md)
+- [AGENTS.md](AGENTS.md) — project memory
+- [Architecture](docs/ARCHITECTURE.md) — topology, compose footprint, scale
+- [Capability spec](docs/SPEC_CAPABILITIES.md)
+- [Action plan](docs/ACTION_PLAN_COURSE_DELIVERY.md)
+- [Reference links](docs/REFERENCE_LINKS.md)
+- [Decision log](docs/memory/DECISIONS.md)
+- [Curriculum map](docs/CURRICULUM_REFACTOR_N8N_TO_DIFY.md)
+- [OpenRouter canvas how-to](docs/HOW_TO_OPENROUTER_CANVAS.md)
+- [Deploy + student tenancy](docs/DEPLOY_AND_STUDENT_TENANCY.md)
 
 ## Requirements
 

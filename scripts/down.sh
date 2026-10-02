@@ -1,9 +1,16 @@
 #!/usr/bin/env bash
+# Stop lab containers (Dify + Open WebUI if present). Safe if either is absent.
 set -euo pipefail
-ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
-if [[ -f "$ROOT/vendor/dify/docker/docker-compose.yaml" ]]; then
-  (cd "$ROOT/vendor/dify/docker" && docker compose down) || true
+# shellcheck source=lib.sh
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/lib.sh"
+
+if [[ -f "$LAB_ROOT/vendor/dify/docker/docker-compose.yaml" ]]; then
+  (cd "$LAB_ROOT/vendor/dify/docker" && docker compose down) || true
 fi
-docker compose -f "$ROOT/docker-compose.open-webui.yml" --env-file "$ROOT/.env" down 2>/dev/null || true
+if [[ -f "$LAB_ROOT/.env" ]]; then
+  docker compose -f "$LAB_ROOT/docker-compose.open-webui.yml" --env-file "$LAB_ROOT/.env" down 2>/dev/null || true
+else
+  docker compose -f "$LAB_ROOT/docker-compose.open-webui.yml" down 2>/dev/null || true
+fi
 echo "Lab stack stopped."

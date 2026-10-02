@@ -3,7 +3,14 @@
 # Uses vfs storage + iptables-legacy (required for container ICC here).
 set -euo pipefail
 
+ensure_bridge_icc() {
+  # Nested VM: Docker bridge ICC often needs an explicit FORWARD accept
+  sudo iptables -C FORWARD -j ACCEPT 2>/dev/null || sudo iptables -I FORWARD -j ACCEPT
+  sudo iptables -C DOCKER-USER -j ACCEPT 2>/dev/null || sudo iptables -I DOCKER-USER -j ACCEPT 2>/dev/null || true
+}
+
 if docker info >/dev/null 2>&1; then
+  ensure_bridge_icc
   echo "Docker already running ($(docker info -f '{{.Driver}}'))."
   exit 0
 fi
@@ -25,9 +32,7 @@ nohup sudo dockerd --host=unix:///var/run/docker.sock >/tmp/dockerd.log 2>&1 &
 for _ in $(seq 1 40); do
   if [[ -S /var/run/docker.sock ]] && docker info >/dev/null 2>&1; then
     sudo chmod 666 /var/run/docker.sock 2>/dev/null || true
-    # Nested VM: Docker bridge ICC often needs an explicit FORWARD accept
-    sudo iptables -C FORWARD -j ACCEPT 2>/dev/null || sudo iptables -I FORWARD -j ACCEPT
-    sudo iptables -C DOCKER-USER -j ACCEPT 2>/dev/null || sudo iptables -I DOCKER-USER -j ACCEPT 2>/dev/null || true
+    ensure_bridge_icc
     echo "Docker is up ($(docker info -f '{{.Driver}}'))."
     exit 0
   fi
