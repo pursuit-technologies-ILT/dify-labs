@@ -114,10 +114,18 @@ cp .env.example .env   # paste OPENROUTER_API_KEY
 
 See [OPENROUTER_AND_PORTAL.md](./OPENROUTER_AND_PORTAL.md) for wiring Apps into Open WebUI.
 
-## Next artifacts to author (follow-ups)
+## Delivery plan & specs
 
-1. Rewritten course description (marketing/LMS blurb) with Dify naming.
-2. Per-lab instructor guide (click-path in Dify 1.17).
-3. Fixture mock APIs for claims/prior-auth tools.
-4. Trainee worksheet pack (no canvas access).
-5. Enterprise review packet pointing at [ENTERPRISE_REVIEW.md](./ENTERPRISE_REVIEW.md).
+- Capabilities: [SPEC_CAPABILITIES.md](./SPEC_CAPABILITIES.md)
+- Phased action plan: [ACTION_PLAN_COURSE_DELIVERY.md](./ACTION_PLAN_COURSE_DELIVERY.md)
+- Reference links: [REFERENCE_LINKS.md](./REFERENCE_LINKS.md)
+- Decisions: [memory/DECISIONS.md](./memory/DECISIONS.md)
+- Project memory: [../AGENTS.md](../AGENTS.md)
+
+## Remaining follow-ups
+
+1. Per-lab instructor runbooks (`docs/runbooks/module-0N.md`).
+2. Fixture mock APIs for claims/prior-auth tools.
+3. Trainee worksheet pack (no canvas access).
+4. Portal BFF + App API keys (see action plan Phase 1).
+5. DSL exports under `templates/` once Modules 2–5 are built.

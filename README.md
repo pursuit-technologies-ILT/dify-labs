@@ -38,12 +38,15 @@ That is the whole operator loop. Everything else is scripted.
 
 ## Docs
 
-- [Curriculum refactor: n8n → Dify](docs/CURRICULUM_REFACTOR_N8N_TO_DIFY.md) — module/lab mapping for the health-insurance course
-- [How to: OpenRouter + drag-and-drop canvas](docs/HOW_TO_OPENROUTER_CANVAS.md) — click path + lab sample Chatflow
-- [Deploy + student tenancy (minimal logins)](docs/DEPLOY_AND_STUDENT_TENANCY.md) — custom domain + portal BFF pattern
-- [Enterprise infrastructure review notes](docs/ENTERPRISE_REVIEW.md) — containers, exposure, outbound, secrets
-- [OpenRouter + trainee portal wiring](docs/OPENROUTER_AND_PORTAL.md) — plugin, API mapping, RBAC path
-- [Comparison snapshot](docs/COMPARISON.md) — Dify vs Flowise vs Open WebUI for this use case
+- [AGENTS.md](AGENTS.md) — long-term agent/project memory
+- [Capability spec](docs/SPEC_CAPABILITIES.md) — what Dify CE can deliver for this course
+- [Action plan: course delivery](docs/ACTION_PLAN_COURSE_DELIVERY.md) — phased plan for the outline
+- [Reference links](docs/REFERENCE_LINKS.md) — canonical Dify / OpenRouter / lab URLs
+- [Decision log](docs/memory/DECISIONS.md) — durable decisions
+- [Curriculum refactor: n8n → Dify](docs/CURRICULUM_REFACTOR_N8N_TO_DIFY.md) — module/lab mapping
+- [How to: OpenRouter + drag-and-drop canvas](docs/HOW_TO_OPENROUTER_CANVAS.md) — builder click path
+- [Deploy + student tenancy](docs/DEPLOY_AND_STUDENT_TENANCY.md) — custom domain + portal BFF
+- [Enterprise review](docs/ENTERPRISE_REVIEW.md) · [Portal wiring](docs/OPENROUTER_AND_PORTAL.md) · [Comparison](docs/COMPARISON.md)
 
 ## Requirements
 
