@@ -37,6 +37,12 @@ artifacts/screenshots/
 # Vibium local install under tools/vibium (commit sources + lockfile; not node_modules)
 tools/vibium/node_modules/
 
+# Next.js companion (web/.gitignore also covers .next / node_modules)
+web/node_modules/
+web/.next/
+web/.vercel/
+.vercel/
+
 # OS / editor
 .DS_Store
 .idea/
