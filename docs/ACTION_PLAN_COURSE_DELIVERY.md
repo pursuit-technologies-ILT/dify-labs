@@ -134,6 +134,14 @@ Instructors may open Studio; students stay in portal.
 
 ---
 
+## Temporary public Studio (demo-only — teardown ~2026-10-06)
+
+A shared-password Vercel gate plus a tunneled Dify CE instance is **not** the class delivery path. Production students still authenticate only in the portal BFF (`user=student:<id>`). Do not keep public Studio + a shared password after **2026-10-06**.
+
+Teardown: remove `COLLAB_PASSWORD` from Vercel, take down the tunnel, restore localhost Dify URLs, rotate the Studio admin password, disable public Studio.
+
+---
+
 ## RACI (simplified)
 
 | Workstream | R | A | C | I |

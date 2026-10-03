@@ -69,3 +69,11 @@ Append-only. Newest at bottom.
 - **Why:** `origin repo view` shows `mirrorStatus: no-mirror`, `githubInstallationId: null`. `origin repo mirror transition --to inbound|outbound` refuses from `no-mirror`. Origin CLI/API support inbound GitHub→Origin live sync, not converting this Origin-only repo into an outbound GitHub push-mirror. Cloud agent still cannot `gh repo create` (no GitHub login / token).
 - **Do not claim:** a GitHub URL exists until the user (or a `GITHUB_TOKEN`) creates it and a browser/API check returns 200.
 - **Refs:** `docs/PUBLIC_REPO.md`, https://cursor.com/docs/origin/mirror-github
+
+## 2026-10-03 — Collaborator walkthrough: shared password, BYO OpenRouter, tunneled canvas
+
+- **Decision:** Add a single password gate on the Vercel companion (`COLLAB_PASSWORD` / httpOnly cookie). Collaborators bring their own OpenRouter key (sessionStorage + `x-openrouter-key`; never hardcoded). Expose the real Dify Studio canvas via a public HTTPS tunnel to nginx :3847 when the VM allows it. Align Dify admin password to the same temp secret; email remains `lab-admin@example.com`.
+- **Why:** Requested collaborator access to the actual Chatflow editor, not screenshots, without a second distinct password and without embedding operator OpenRouter keys.
+- **Not production:** Shared-password public Studio is demo-only. Class path remains portal IdP → BFF → Service API. Teardown ~**2026-10-06**.
+- **Refs:** `web/src/proxy.ts`, `docs/HANDOFF.md` teardown list, `scripts/tunnel-dify.sh`
+

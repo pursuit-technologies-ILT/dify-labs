@@ -76,6 +76,29 @@ apply_dify_host_port() {
   set_env_kv "$docker_env" NEXT_PUBLIC_SOCKET_URL "ws://localhost:${port}"
 }
 
+# Point Dify console/app/file URLs at a public HTTPS (or HTTP) origin.
+# Required when exposing nginx :3847 via a tunnel so Studio cookies/CSRF match.
+apply_dify_public_base_url() {
+  local docker_env="$1" base="${2%/}" host ws
+  if [[ -z "$base" ]]; then
+    echo "error: public base URL is empty" >&2
+    return 1
+  fi
+  host="${base#https://}"
+  host="${host#http://}"
+  if [[ "$base" == https://* ]]; then
+    ws="wss://${host}"
+  else
+    ws="ws://${host}"
+  fi
+  local k
+  for k in CONSOLE_API_URL CONSOLE_WEB_URL SERVICE_API_URL APP_API_URL APP_WEB_URL FILES_URL TRIGGER_URL; do
+    set_env_kv "$docker_env" "$k" "$base"
+  done
+  set_env_kv "$docker_env" ENDPOINT_URL_TEMPLATE "${base}/e/{hook_id}"
+  set_env_kv "$docker_env" NEXT_PUBLIC_SOCKET_URL "$ws"
+}
+
 # Probe one URL; prints "<url> -> <code|down>" and never fails the caller.
 probe_http() {
   local url="$1" code

@@ -42,7 +42,7 @@ export function WalkthroughTestCard({
   return (
     <Card>
       <CardHeader>
-        <CardTitle>2. Connectivity test</CardTitle>
+        <CardTitle>3. Connectivity test</CardTitle>
         <CardDescription>
           Lists models and runs a tiny completion on{" "}
           <code className="font-mono text-xs">{OPENROUTER_MODEL}</code> — the

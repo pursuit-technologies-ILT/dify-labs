@@ -4,19 +4,23 @@ Self-hosted **[Dify](https://dify.ai) Community Edition 1.17.1** for enterprise 
 
 Optional Open WebUI is available for demos; it is not the class delivery path.
 
-## Public walkthrough (no Docker)
+## Public walkthrough (Vercel)
 
-Dify cannot run on Vercel. Collaborators can still exercise the **OpenRouter + Member Benefits FAQ** story in a companion Next.js app under `web/` (no Compose, no Studio canvas).
+Dify cannot run on Vercel. The companion Next.js app under `web/` has a **single password gate**, then BYO OpenRouter key, then a deep-link (and iframe when allowed) to the **live Studio canvas** when a tunnel URL is configured.
 
 ```bash
 cd web
+cp .env.example .env.local   # set COLLAB_PASSWORD locally; never commit it
 npm install
 npm run dev -- --port 3849
 ```
 
-Paste a key from [openrouter.ai/keys](https://openrouter.ai/keys). The key stays in the browser (`sessionStorage`) and is sent per request as `x-openrouter-key` to a Route Handler that proxies OpenRouter and does not store the key.
+Paste a key from [openrouter.ai/keys](https://openrouter.ai/keys). The key stays in the browser (`sessionStorage`) and is sent per request as `x-openrouter-key` to a Route Handler that proxies OpenRouter and does not store the key. There is no server-side OpenRouter key.
 
-Public demo: [https://dify-labs-walkthrough.vercel.app](https://dify-labs-walkthrough.vercel.app)
+Public demo: [https://dify-labs-walkthrough.vercel.app](https://dify-labs-walkthrough.vercel.app)  
+Studio email if Dify’s own form appears: `lab-admin@example.com` (same password as the walkthrough gate).
+
+**Teardown ~2026-10-06:** remove `COLLAB_PASSWORD` from Vercel, take down any public tunnel to :3847, restore Dify URLs to localhost, rotate the Studio admin password. Shared-password Studio is demo-only, not the portal-BFF student path.
 
 ## Quickstart
 
@@ -93,6 +97,7 @@ Never commit real keys or local credentials. Already gitignored:
 
 - `.env` (copy from `.env.example`)
 - `lab-creds.env` (local admin notes)
+- `web/.env.local` (`COLLAB_PASSWORD` for the walkthrough gate)
 - `vendor/dify/docker/.env`, `volumes/`, and generated override copies
 - `artifacts/screenshots/` bulk runs (regenerate with the capture script)
 - `tools/vibium/node_modules/`

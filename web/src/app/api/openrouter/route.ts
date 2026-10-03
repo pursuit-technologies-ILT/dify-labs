@@ -1,5 +1,7 @@
+import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 
+import { COLLAB_COOKIE_NAME, isValidSessionToken } from "@/lib/collab-auth";
 import {
   looksLikeOpenRouterKey,
   OPENROUTER_MODEL,
@@ -73,6 +75,14 @@ async function openRouterFetch(
 }
 
 export async function POST(request: Request) {
+  const jar = await cookies();
+  if (!isValidSessionToken(jar.get(COLLAB_COOKIE_NAME)?.value)) {
+    return NextResponse.json(
+      { ok: false, error: "Sign in with the collaborator password first." },
+      { status: 401 },
+    );
+  }
+
   const key = extractKey(request);
   if (!looksLikeOpenRouterKey(key)) {
     return NextResponse.json(

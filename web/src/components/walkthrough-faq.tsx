@@ -43,7 +43,7 @@ export function WalkthroughFaqCard({
   return (
     <Card>
       <CardHeader>
-        <CardTitle>3. Member Benefits FAQ</CardTitle>
+        <CardTitle>4. Member Benefits FAQ</CardTitle>
         <CardDescription>
           Module 1 of the course: a Chat App that answers synthetic member
           questions. In Docker this is a Dify Chatflow. Here it is the same

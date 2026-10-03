@@ -26,6 +26,7 @@ vendor/dify/docker/nginx/conf.d/default.conf
 # Runtime / local state
 *.log
 /swapfile
+.local/
 agent-tools/
 .playwright/
 .cache/

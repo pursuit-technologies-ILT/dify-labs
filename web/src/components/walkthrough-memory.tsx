@@ -38,7 +38,7 @@ export function WalkthroughMemoryCard({
   return (
     <Card>
       <CardHeader>
-        <CardTitle>4. Optional: remember plan type</CardTitle>
+        <CardTitle>5. Optional: remember plan type</CardTitle>
         <CardDescription>
           Module 2 maps n8n memory nodes to Chatflow conversation variables.
           This two-turn call shows the idea: the member states HDHP, then

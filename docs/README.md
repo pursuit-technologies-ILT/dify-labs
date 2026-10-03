@@ -34,6 +34,9 @@ Read in this order when onboarding or publishing the repo.
 | `scripts/bootstrap.sh` | Vendor Dify + apply `lab/` overlays |
 | `scripts/up.sh` / `down.sh` / `status.sh` | Start / stop / probe |
 | `scripts/lib.sh` | Shared env / overlay helpers |
+| `scripts/set-dify-admin-password.sh` | Align Studio admin hash with `COLLAB_PASSWORD` |
+| `scripts/apply-dify-public-url.sh` | Point Dify URL env at a tunnel (or `--localhost`) |
+| `scripts/tunnel-dify.sh` | Cloudflare quick tunnel to :3847 |
 | `scripts/screenshots/capture-lab.sh` | Vibium + Chrome lab screenshots |
 | `scripts/sync-github.sh` | Push current branch to Origin, then to `github` remote if present |
 

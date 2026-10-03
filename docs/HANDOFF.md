@@ -52,6 +52,26 @@ Authoritative detail: [ARCHITECTURE.md](./ARCHITECTURE.md). Tenancy / custom dom
 
 ---
 
+## Temporary collaborator demo (expires ~2026-10-06)
+
+Public Vercel walkthrough: [https://dify-labs-walkthrough.vercel.app](https://dify-labs-walkthrough.vercel.app)
+
+This is **demo-only**, not the production portal-BFF student path. One shared password (`COLLAB_PASSWORD` on Vercel; never in git) gates the site with an httpOnly session cookie. Collaborators still paste their **own** OpenRouter key (`sessionStorage` + `x-openrouter-key`). Dify Studio admin email stays `lab-admin@example.com`; the console password is aligned to the same temp secret so there is not a second distinct password.
+
+Live canvas requires a public HTTPS tunnel to nginx **:3847** plus Dify URL env (`CONSOLE_WEB_URL`, `APP_WEB_URL`, `FILES_URL`, `NEXT_PUBLIC_SOCKET_URL`, …) pointed at that host. Helpers: `./scripts/tunnel-dify.sh`, `./scripts/apply-dify-public-url.sh`, `COLLAB_PASSWORD=… ./scripts/set-dify-admin-password.sh`.
+
+### Teardown action items (~2026-10-06)
+
+1. Remove Vercel env `COLLAB_PASSWORD` / `DEMO_PASSWORD` / `COLLAB_SESSION_SECRET` and `NEXT_PUBLIC_DIFY_STUDIO_URL`.
+2. Stop the public tunnel; restore Dify URLs with `./scripts/apply-dify-public-url.sh --localhost`.
+3. Restore the Dify admin password (no longer the shared demo secret).
+4. Disable public Studio access.
+5. Treat any leftover shared password as compromised.
+
+Studio LLM nodes may still use the lab OpenRouter plugin credential. Walkthrough chat/test uses the visitor’s key and does not require injecting it into Dify.
+
+---
+
 ## Screenshot protocol (lab materials)
 
 | Piece | Path / command |
@@ -114,6 +134,7 @@ Index: [README.md](./README.md). Root showcase front door: [../README.md](../REA
 - Sample Chatflow + OpenRouter light model path
 - Vibium + Chrome screenshot protocol + curated proof/worksheet PNGs
 - Publish-ready README / `.gitignore` hardened for secrets and bulk screenshots
+- 2026-10-03: walkthrough password gate + BYO OpenRouter key + optional tunneled Studio canvas (demo-only)
 
 ---
 

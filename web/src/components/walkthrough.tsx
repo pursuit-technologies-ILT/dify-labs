@@ -1,6 +1,7 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useMemo, useState, useSyncExternalStore } from "react";
+import { useRouter } from "next/navigation";
 import {
   BookOpenIcon,
   KeyRoundIcon,
@@ -19,13 +20,14 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import { WalkthroughCanvasCard } from "@/components/walkthrough-canvas";
 import { WalkthroughFaqCard } from "@/components/walkthrough-faq";
+import { WalkthroughFooter } from "@/components/walkthrough-footer";
 import { WalkthroughKeyCard } from "@/components/walkthrough-key";
 import { WalkthroughMemoryCard } from "@/components/walkthrough-memory";
 import { WalkthroughTestCard } from "@/components/walkthrough-test";
 import {
   DEFAULT_FAQ_PROMPT,
-  KEY_STORAGE_KEY,
   looksLikeOpenRouterKey,
   maskApiKey,
   MEMBER_BENEFITS_SYSTEM,
@@ -38,11 +40,21 @@ import {
   type TestResult,
   type TranscriptLine,
 } from "@/lib/walkthrough-client";
+import {
+  clearStoredKey,
+  useStoredOpenRouterKey,
+  writeStoredKey,
+} from "@/lib/openrouter-session";
 
 export function Walkthrough() {
+  const router = useRouter();
+  const storedKey = useStoredOpenRouterKey();
+  const hydrated = useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false,
+  );
   const [draftKey, setDraftKey] = useState("");
-  const [storedKey, setStoredKey] = useState<string | null>(null);
-  const [hydrated, setHydrated] = useState(false);
   const [keyError, setKeyError] = useState<string | null>(null);
   const [testLoading, setTestLoading] = useState(false);
   const [testError, setTestError] = useState<string | null>(null);
@@ -55,38 +67,20 @@ export function Walkthrough() {
   const [memoryError, setMemoryError] = useState<string | null>(null);
   const [memoryLines, setMemoryLines] = useState<TranscriptLine[]>([]);
 
-  useEffect(() => {
-    try {
-      const existing = sessionStorage.getItem(KEY_STORAGE_KEY);
-      if (existing && looksLikeOpenRouterKey(existing)) {
-        setStoredKey(existing);
-      }
-    } catch {
-      // sessionStorage may be unavailable; the visitor can still paste per session in memory.
-    }
-    setHydrated(true);
-  }, []);
-
   const persistKey = useCallback((value: string) => {
-    try {
-      sessionStorage.setItem(KEY_STORAGE_KEY, value);
-    } catch {
+    const ok = writeStoredKey(value);
+    if (!ok) {
       toast.message("Saved in this tab only — sessionStorage is blocked.");
     }
   }, []);
 
   const clearKey = useCallback(() => {
-    setStoredKey(null);
     setDraftKey("");
     setTestResult(null);
     setTestError(null);
     setFaqReply(null);
     setMemoryLines([]);
-    try {
-      sessionStorage.removeItem(KEY_STORAGE_KEY);
-    } catch {
-      // ignore
-    }
+    clearStoredKey();
     toast.success("Key cleared from this browser tab.");
   }, []);
 
@@ -99,7 +93,6 @@ export function Walkthrough() {
       return;
     }
     setKeyError(null);
-    setStoredKey(next);
     persistKey(next);
     setDraftKey("");
     toast.success("Key saved in this tab only.");
@@ -155,6 +148,16 @@ export function Walkthrough() {
     }
   }, [faqPrompt, storedKey]);
 
+  const onLogout = useCallback(async () => {
+    try {
+      await fetch("/api/auth/logout", { method: "POST" });
+    } catch {
+      // Cookie clear is best-effort; send the visitor to login anyway.
+    }
+    router.replace("/login");
+    router.refresh();
+  }, [router]);
+
   const onMemory = useCallback(async () => {
     if (!storedKey) {
       return;
@@ -206,17 +209,18 @@ export function Walkthrough() {
       <header className="flex flex-col gap-4">
         <div className="flex flex-wrap items-center gap-2">
           <Badge>Companion walkthrough</Badge>
-          <Badge variant="secondary">Not Dify itself</Badge>
+          <Badge variant="secondary">Demo shared login</Badge>
         </div>
         <div className="flex flex-col gap-3">
           <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">
-            Dify training lab, without Docker
+            Dify training lab walkthrough
           </h1>
           <p className="max-w-2xl text-muted-foreground text-pretty">
-            This public site is a companion to the self-hosted Dify lab
-            (ports 3847 / 3848). Dify cannot run on Vercel. Paste an OpenRouter
-            key, prove the model path, and walk the Member Benefits FAQ story
-            the course uses in Studio — then run the real canvas locally.
+            Password gate first, then paste your own OpenRouter key, then open
+            the live Member Benefits FAQ canvas. Dify itself does not run on
+            Vercel — the canvas is the tunneled Studio editor. Chat on this
+            page uses your key via sessionStorage and x-openrouter-key; nothing
+            is hardcoded.
           </p>
         </div>
         <div className="flex flex-wrap gap-2">
@@ -247,6 +251,9 @@ export function Walkthrough() {
           >
             <KeyRoundIcon data-icon="inline-start" />
             Get an API key
+          </Button>
+          <Button variant="ghost" onClick={onLogout}>
+            Sign out
           </Button>
         </div>
       </header>
@@ -305,6 +312,7 @@ export function Walkthrough() {
         onSave={onSaveKey}
         onClear={clearKey}
       />
+      <WalkthroughCanvasCard />
       <WalkthroughTestCard
         storedKey={storedKey}
         loading={testLoading}
@@ -330,25 +338,7 @@ export function Walkthrough() {
       />
 
       <Separator />
-
-      <section className="flex flex-col gap-3 text-sm text-muted-foreground">
-        <h2 className="text-foreground text-lg font-medium">
-          What this page is not
-        </h2>
-        <p>
-          The Dify canvas, Weaviate knowledge, plugin daemon, and portal BFF
-          live in Docker on localhost:3847. See{" "}
-          <code className="font-mono text-xs">docs/HANDOFF.md</code> in the
-          repo for operator steps, tenancy, and what not to commit. Origin:{" "}
-          <a
-            className="underline underline-offset-4"
-            href="https://cursor.com/codebase/manutej/dify-labs"
-          >
-            manutej/dify-labs
-          </a>
-          .
-        </p>
-      </section>
+      <WalkthroughFooter />
     </div>
   );
 }
