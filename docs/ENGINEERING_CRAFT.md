@@ -41,6 +41,8 @@ catalog entry → blueprint (optional) → Studio build → light tests → live
 
 Parallel agents: framework + catalog + mock API + runbooks. **One** integrator for `OPENROUTER_LIVE=1`.
 
+Long-horizon programmes use [operations/COMPOUND-BUILD-SOP.md](./operations/COMPOUND-BUILD-SOP.md) (role firewall, build-log, independent eval before checklist **done**).
+
 ## Automatic flows (instances)
 
 `lab/instances/*.instance.yaml` select which catalog labs are enabled and map:

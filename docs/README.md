@@ -26,6 +26,8 @@ Read in this order when onboarding or publishing the repo.
 | [CONCEPTS.md](CONCEPTS.md) | Project vocabulary |
 | [plans/2026-10-03-module-lab-catalog-brainstorm.md](plans/2026-10-03-module-lab-catalog-brainstorm.md) | 30-lab catalog brainstorm + framework scope |
 | [solutions/](solutions/) | Compound learnings |
+| [operations/COMPOUND-BUILD-SOP.md](operations/COMPOUND-BUILD-SOP.md) | Multi-agent compound build loop |
+| [operations/LAB-FACTORY-CHECKLIST.md](operations/LAB-FACTORY-CHECKLIST.md) | Lab factory programme tracker |
 | [COURSE_DESCRIPTION_DIFY.md](COURSE_DESCRIPTION_DIFY.md) | LMS blurb (Dify edition) |
 | [HOW_TO_OPENROUTER_CANVAS.md](HOW_TO_OPENROUTER_CANVAS.md) | Builder click path for OpenRouter |
 | [lab-materials/SHOT_LIST.md](lab-materials/SHOT_LIST.md) | Module shot list + caption style |

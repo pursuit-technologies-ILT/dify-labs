@@ -11,6 +11,15 @@ This repo is an **enterprise training lab** that replaces **n8n** with **self-ho
 5. **Pinned Dify** — Community Edition **1.17.1** under `vendor/dify/docker` (see `vendor/DIFY_VERSION`).
 6. **Lab ports** — Dify `3847`, Open WebUI `3848`. Use **`localhost` not `127.0.0.1`** for browser auth cookies.
 
+## Compound build (long programmes)
+
+For multi-slice roadmaps (lab factory, portal wiring, DSL waves):
+
+- Follow [docs/operations/COMPOUND-BUILD-SOP.md](docs/operations/COMPOUND-BUILD-SOP.md) and [skills/compound-build-loop/SKILL.md](skills/compound-build-loop/SKILL.md).
+- **Implementers must not self-SHIP** — only independent eval marks checklist rows done.
+- **One integrator** runs `OPENROUTER_LIVE=1` live OpenRouter per slice eval (no parallel live calls).
+- Gate stack: `./scripts/programme-gate.sh` on integration branch tip before bundle PR.
+
 ## Stack roles
 
 | Role | System |
@@ -49,6 +58,8 @@ This repo is an **enterprise training lab** that replaces **n8n** with **self-ho
 | [docs/CONCEPTS.md](docs/CONCEPTS.md) | Vocabulary (blueprint, catalog, instance, wire) |
 | [templates/lab-catalog.yaml](templates/lab-catalog.yaml) | 30 teachable labs (4+ per module) |
 | [docs/solutions/](docs/solutions/) | Compound learnings |
+| [docs/operations/COMPOUND-BUILD-SOP.md](docs/operations/COMPOUND-BUILD-SOP.md) | Long-horizon multi-agent build loop |
+| [docs/operations/LAB-FACTORY-CHECKLIST.md](docs/operations/LAB-FACTORY-CHECKLIST.md) | Active programme checklist |
 
 ## Ops commands
 

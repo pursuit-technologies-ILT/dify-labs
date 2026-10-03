@@ -14,3 +14,7 @@ Stable terms for agents, instructors, and portal engineers. Update when a new pa
 | **Student path** | Portal BFF → Dify `/v1/chat-messages` with `user=student:<id>` |
 | **Builder path** | Dify Studio on `:3847`; DSL export → `templates/exports/` |
 | **Collaborator demo** | Vercel walkthrough + BYO OpenRouter — not the student path |
+| **Programme slice (Sx)** | One checklist row with build spec, gates, independent SHIP |
+| **programme-gate** | `./scripts/programme-gate.sh` — light tests + web lint + optional live OpenRouter |
+| **Build-log** | `docs/operations/build-log/*.md` — monitor append-only timeline |
+| **Self-SHIP void** | Builders never mark checklist done; eval writes SHIP \| NO-SHIP |
