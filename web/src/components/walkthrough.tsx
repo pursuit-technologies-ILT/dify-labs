@@ -5,42 +5,24 @@ import {
   BookOpenIcon,
   KeyRoundIcon,
   MessageSquareIcon,
-  PlugZapIcon,
   ShieldIcon,
-  Trash2Icon,
   WorkflowIcon,
 } from "lucide-react";
 import { toast } from "sonner";
 
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   Card,
-  CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import {
-  Empty,
-  EmptyDescription,
-  EmptyHeader,
-  EmptyMedia,
-  EmptyTitle,
-} from "@/components/ui/empty";
-import {
-  Field,
-  FieldDescription,
-  FieldGroup,
-  FieldLabel,
-} from "@/components/ui/field";
-import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
-import { Skeleton } from "@/components/ui/skeleton";
-import { Spinner } from "@/components/ui/spinner";
-import { Textarea } from "@/components/ui/textarea";
+import { WalkthroughFaqCard } from "@/components/walkthrough-faq";
+import { WalkthroughKeyCard } from "@/components/walkthrough-key";
+import { WalkthroughMemoryCard } from "@/components/walkthrough-memory";
+import { WalkthroughTestCard } from "@/components/walkthrough-test";
 import {
   DEFAULT_FAQ_PROMPT,
   KEY_STORAGE_KEY,
@@ -50,42 +32,12 @@ import {
   MEMORY_FIRST_TURN,
   MEMORY_SECOND_TURN,
   OPENROUTER_MODEL,
-  type ChatMessage,
 } from "@/lib/openrouter";
-
-type TestResult = {
-  modelCount: number;
-  hasLabModel: boolean;
-  snippet: string;
-};
-
-type TranscriptLine = {
-  role: "user" | "assistant";
-  content: string;
-};
-
-async function proxyOpenRouter(
-  key: string,
-  payload: { action: "test" } | { action: "chat"; messages: ChatMessage[] },
-): Promise<Record<string, unknown>> {
-  const response = await fetch("/api/openrouter", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "x-openrouter-key": key,
-    },
-    body: JSON.stringify(payload),
-  });
-  const json = (await response.json()) as Record<string, unknown>;
-  if (!response.ok || json.ok !== true) {
-    const error =
-      typeof json.error === "string"
-        ? json.error
-        : "The proxy could not complete this OpenRouter call.";
-    throw new Error(error);
-  }
-  return json;
-}
+import {
+  proxyOpenRouter,
+  type TestResult,
+  type TranscriptLine,
+} from "@/lib/walkthrough-client";
 
 export function Walkthrough() {
   const [draftKey, setDraftKey] = useState("");
@@ -340,268 +292,42 @@ export function Walkthrough() {
         </Card>
       </section>
 
-      <Card>
-        <CardHeader>
-          <CardTitle>1. Paste your OpenRouter key</CardTitle>
-          <CardDescription>
-            Create a key at{" "}
-            <a
-              className="underline underline-offset-4"
-              href="https://openrouter.ai/keys"
-            >
-              openrouter.ai/keys
-            </a>
-            . It stays in this tab&apos;s sessionStorage and is sent only as a
-            request header to our proxy. We never persist it on the server or
-            echo the full value after save.
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          {!hydrated ? (
-            <div className="flex flex-col gap-3">
-              <Skeleton className="h-8 w-full" />
-              <Skeleton className="h-8 w-40" />
-            </div>
-          ) : (
-            <FieldGroup>
-              <Field data-invalid={keyError ? true : undefined}>
-                <FieldLabel htmlFor="openrouter-key">OPENROUTER_API_KEY</FieldLabel>
-                <Input
-                  id="openrouter-key"
-                  type="password"
-                  autoComplete="off"
-                  spellCheck={false}
-                  placeholder="sk-or-…"
-                  value={draftKey}
-                  aria-invalid={keyError ? true : undefined}
-                  onChange={(event) => {
-                    setDraftKey(event.target.value);
-                    setKeyError(null);
-                  }}
-                  onKeyDown={(event) => {
-                    if (event.key === "Enter") {
-                      event.preventDefault();
-                      onSaveKey();
-                    }
-                  }}
-                />
-                <FieldDescription>
-                  Format check only: keys must start with sk-or-. Clear the key
-                  when you are done.
-                </FieldDescription>
-                {keyError ? (
-                  <p className="text-sm text-destructive">{keyError}</p>
-                ) : null}
-              </Field>
-              {masked ? (
-                <Alert>
-                  <KeyRoundIcon />
-                  <AlertTitle>Key on this tab</AlertTitle>
-                  <AlertDescription>
-                    Saved as {masked}. Reload keeps it until you close the tab
-                    or click Clear.
-                  </AlertDescription>
-                </Alert>
-              ) : (
-                <Empty className="border">
-                  <EmptyHeader>
-                    <EmptyMedia variant="icon">
-                      <KeyRoundIcon />
-                    </EmptyMedia>
-                    <EmptyTitle>No key in this tab yet</EmptyTitle>
-                    <EmptyDescription>
-                      Paste a key and Save to unlock the connectivity test and
-                      FAQ chat. Nothing is stored in git or on Vercel.
-                    </EmptyDescription>
-                  </EmptyHeader>
-                </Empty>
-              )}
-            </FieldGroup>
-          )}
-        </CardContent>
-        <CardFooter className="flex flex-wrap gap-2">
-          <Button onClick={onSaveKey}>Save</Button>
-          <Button variant="outline" onClick={clearKey} disabled={!storedKey}>
-            <Trash2Icon data-icon="inline-start" />
-            Clear
-          </Button>
-        </CardFooter>
-      </Card>
-
-      <Card>
-        <CardHeader>
-          <CardTitle>2. Connectivity test</CardTitle>
-          <CardDescription>
-            Lists models and runs a tiny completion on{" "}
-            <code className="font-mono text-xs">{OPENROUTER_MODEL}</code> — the
-            same light model the lab Chatflow uses.
-          </CardDescription>
-        </CardHeader>
-        <CardContent className="flex flex-col gap-4">
-          {!storedKey ? (
-            <Empty className="border">
-              <EmptyHeader>
-                <EmptyMedia variant="icon">
-                  <PlugZapIcon />
-                </EmptyMedia>
-                <EmptyTitle>Save a key first</EmptyTitle>
-                <EmptyDescription>
-                  The test button stays idle until a valid key is in this tab.
-                </EmptyDescription>
-              </EmptyHeader>
-            </Empty>
-          ) : null}
-          {testLoading ? (
-            <div className="flex flex-col gap-2">
-              <Skeleton className="h-4 w-48" />
-              <Skeleton className="h-20 w-full" />
-            </div>
-          ) : null}
-          {testError ? (
-            <Alert variant="destructive">
-              <AlertTitle>OpenRouter did not accept the test</AlertTitle>
-              <AlertDescription>{testError}</AlertDescription>
-            </Alert>
-          ) : null}
-          {testResult ? (
-            <Alert>
-              <PlugZapIcon />
-              <AlertTitle>Connected</AlertTitle>
-              <AlertDescription>
-                Catalog returned {testResult.modelCount} models
-                {testResult.hasLabModel
-                  ? `; ${OPENROUTER_MODEL} is available.`
-                  : `; ${OPENROUTER_MODEL} was not listed, but the ping still ran.`}{" "}
-                Ping reply: {testResult.snippet || "(empty)"}
-              </AlertDescription>
-            </Alert>
-          ) : null}
-        </CardContent>
-        <CardFooter>
-          <Button onClick={onTest} disabled={!storedKey || testLoading}>
-            {testLoading ? <Spinner data-icon="inline-start" /> : <PlugZapIcon data-icon="inline-start" />}
-            Test OpenRouter
-          </Button>
-        </CardFooter>
-      </Card>
-
-      <Card>
-        <CardHeader>
-          <CardTitle>3. Member Benefits FAQ</CardTitle>
-          <CardDescription>
-            Module 1 of the course: a Chat App that answers synthetic member
-            questions. In Docker this is a Dify Chatflow. Here it is the same
-            system prompt against OpenRouter.
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <FieldGroup>
-            <Field>
-              <FieldLabel htmlFor="faq-prompt">Member question</FieldLabel>
-              <Textarea
-                id="faq-prompt"
-                value={faqPrompt}
-                onChange={(event) => setFaqPrompt(event.target.value)}
-                rows={4}
-              />
-            </Field>
-            {!faqReply && !faqLoading && !faqError ? (
-              <Empty className="border">
-                <EmptyHeader>
-                  <EmptyTitle>No reply yet</EmptyTitle>
-                  <EmptyDescription>
-                    Send the prompt to see how the lab model answers a benefits
-                    FAQ. Full canvas editing still requires self-hosted Dify.
-                  </EmptyDescription>
-                </EmptyHeader>
-              </Empty>
-            ) : null}
-            {faqLoading ? (
-              <div className="flex flex-col gap-2">
-                <Skeleton className="h-4 w-24" />
-                <Skeleton className="h-24 w-full" />
-              </div>
-            ) : null}
-            {faqError ? (
-              <Alert variant="destructive">
-                <AlertTitle>FAQ request failed</AlertTitle>
-                <AlertDescription>{faqError}</AlertDescription>
-              </Alert>
-            ) : null}
-            {faqReply ? (
-              <div className="rounded-lg border bg-muted/40 p-4 text-sm whitespace-pre-wrap">
-                {faqReply}
-              </div>
-            ) : null}
-          </FieldGroup>
-        </CardContent>
-        <CardFooter>
-          <Button onClick={onFaq} disabled={!storedKey || faqLoading}>
-            {faqLoading ? <Spinner data-icon="inline-start" /> : null}
-            Send FAQ prompt
-          </Button>
-        </CardFooter>
-      </Card>
-
-      <Card>
-        <CardHeader>
-          <CardTitle>4. Optional: remember plan type</CardTitle>
-          <CardDescription>
-            Module 2 maps n8n memory nodes to Chatflow conversation variables.
-            This two-turn call shows the idea: the member states HDHP, then
-            asks about the deductible. Dify persists that in Postgres; this
-            demo only sends prior turns in the request.
-          </CardDescription>
-        </CardHeader>
-        <CardContent className="flex flex-col gap-3">
-          {memoryLines.length === 0 && !memoryLoading && !memoryError ? (
-            <Empty className="border">
-              <EmptyHeader>
-                <EmptyTitle>Two-turn memory demo idle</EmptyTitle>
-                <EmptyDescription>
-                  Runs “I am on an HDHP” then a deductible follow-up without
-                  restating the plan type.
-                </EmptyDescription>
-              </EmptyHeader>
-            </Empty>
-          ) : null}
-          {memoryLoading ? (
-            <div className="flex flex-col gap-2">
-              <Skeleton className="h-16 w-full" />
-              <Skeleton className="h-16 w-full" />
-            </div>
-          ) : null}
-          {memoryError ? (
-            <Alert variant="destructive">
-              <AlertTitle>Memory walkthrough failed</AlertTitle>
-              <AlertDescription>{memoryError}</AlertDescription>
-            </Alert>
-          ) : null}
-          {memoryLines.map((line, index) => (
-            <div
-              key={`${line.role}-${index}`}
-              className="rounded-lg border p-3 text-sm"
-            >
-              <p className="mb-1 font-medium">
-                {line.role === "user" ? "Member" : "FAQ agent"}
-              </p>
-              <p className="text-muted-foreground whitespace-pre-wrap">
-                {line.content}
-              </p>
-            </div>
-          ))}
-        </CardContent>
-        <CardFooter>
-          <Button
-            variant="secondary"
-            onClick={onMemory}
-            disabled={!storedKey || memoryLoading}
-          >
-            {memoryLoading ? <Spinner data-icon="inline-start" /> : null}
-            Run two-turn memory demo
-          </Button>
-        </CardFooter>
-      </Card>
+      <WalkthroughKeyCard
+        hydrated={hydrated}
+        draftKey={draftKey}
+        masked={masked}
+        keyError={keyError}
+        storedKey={storedKey}
+        onDraftChange={(value) => {
+          setDraftKey(value);
+          setKeyError(null);
+        }}
+        onSave={onSaveKey}
+        onClear={clearKey}
+      />
+      <WalkthroughTestCard
+        storedKey={storedKey}
+        loading={testLoading}
+        error={testError}
+        result={testResult}
+        onTest={onTest}
+      />
+      <WalkthroughFaqCard
+        storedKey={storedKey}
+        prompt={faqPrompt}
+        loading={faqLoading}
+        error={faqError}
+        reply={faqReply}
+        onPromptChange={setFaqPrompt}
+        onSend={onFaq}
+      />
+      <WalkthroughMemoryCard
+        storedKey={storedKey}
+        loading={memoryLoading}
+        error={memoryError}
+        lines={memoryLines}
+        onRun={onMemory}
+      />
 
       <Separator />
 

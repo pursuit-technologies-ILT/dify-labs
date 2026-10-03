@@ -16,7 +16,7 @@ npm run dev -- --port 3849
 
 Paste a key from [openrouter.ai/keys](https://openrouter.ai/keys). The key stays in the browser (`sessionStorage`) and is sent per request as `x-openrouter-key` to a Route Handler that proxies OpenRouter and does not store the key.
 
-Public demo URL: *(added after Vercel deploy)*
+Public demo: [https://dify-labs-walkthrough.vercel.app](https://dify-labs-walkthrough.vercel.app)
 
 ## Quickstart
 
