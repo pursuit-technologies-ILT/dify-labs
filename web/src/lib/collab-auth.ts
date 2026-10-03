@@ -46,12 +46,23 @@ export function passwordsMatch(candidate: string): boolean {
   return buffersEqual(left, right);
 }
 
-export function createSessionToken(nowMs = Date.now()): string {
+function signedTimestampToken(ttlMs: number, nowMs = Date.now()): string {
   const secret = sessionSecret();
-  const expiresAt = nowMs + COLLAB_SESSION_MAX_AGE_SECONDS * 1000;
+  const expiresAt = nowMs + ttlMs;
   const payload = `${nowMs}.${expiresAt}`;
   const signature = sha256Hmac(secret, payload).toString("hex");
   return `${payload}.${signature}`;
+}
+
+export function createSessionToken(nowMs = Date.now()): string {
+  return signedTimestampToken(COLLAB_SESSION_MAX_AGE_SECONDS * 1000, nowMs);
+}
+
+/** Short-lived ticket for same-origin Dify Studio handoff (`/collab-sso`). */
+export const STUDIO_TICKET_TTL_MS = 2 * 60 * 1000;
+
+export function createStudioTicket(nowMs = Date.now()): string {
+  return signedTimestampToken(STUDIO_TICKET_TTL_MS, nowMs);
 }
 
 export function isValidSessionToken(token: string | undefined | null): boolean {

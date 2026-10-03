@@ -56,17 +56,19 @@ Authoritative detail: [ARCHITECTURE.md](./ARCHITECTURE.md). Tenancy / custom dom
 
 Public Vercel walkthrough: [https://dify-labs-walkthrough.vercel.app](https://dify-labs-walkthrough.vercel.app)
 
-This is **demo-only**, not the production portal-BFF student path. One shared password (`COLLAB_PASSWORD` on Vercel; never in git) gates the site with an httpOnly session cookie. Collaborators still paste their **own** OpenRouter key (`sessionStorage` + `x-openrouter-key`). Dify Studio admin email stays `lab-admin@example.com`; the console password is aligned to the same temp secret so there is not a second distinct password.
+This is **demo-only**, not the production portal-BFF student path. One shared password (`COLLAB_PASSWORD` on Vercel; never in git) gates the walkthrough. **Open Dify canvas** issues a 2-minute HMAC ticket; nginx `/collab-sso` logs into Studio and sets `__Host-access_token` so there is no second login. Collaborators still paste their **own** OpenRouter key (`sessionStorage` + `x-openrouter-key`). Studio admin email remains `lab-admin@example.com` (used only by the SSO helper).
 
-Live canvas requires a public HTTPS tunnel to nginx **:3847** plus Dify URL env (`CONSOLE_WEB_URL`, `APP_WEB_URL`, `FILES_URL`, `NEXT_PUBLIC_SOCKET_URL`, …) pointed at that host. Helpers: `./scripts/tunnel-dify.sh`, `./scripts/apply-dify-public-url.sh`, `COLLAB_PASSWORD=… ./scripts/set-dify-admin-password.sh`.
+Live canvas requires a public HTTPS tunnel to nginx **:3847**, Dify URL env pointed at that host, and `./scripts/collab-sso.sh` on **:3850**. Helpers: `./scripts/tunnel-dify.sh`, `./scripts/apply-dify-public-url.sh`, `COLLAB_PASSWORD=… ./scripts/set-dify-admin-password.sh`.
+
+Developers wiring the shared website: [WEBSITE_INTEGRATION.md](WEBSITE_INTEGRATION.md).
 
 ### Teardown action items (~2026-10-06)
 
 1. Remove Vercel env `COLLAB_PASSWORD` / `DEMO_PASSWORD` / `COLLAB_SESSION_SECRET` and `NEXT_PUBLIC_DIFY_STUDIO_URL`.
-2. Stop the public tunnel; restore Dify URLs with `./scripts/apply-dify-public-url.sh --localhost`.
-3. Restore the Dify admin password (no longer the shared demo secret).
-4. Disable public Studio access.
-5. Treat any leftover shared password as compromised.
+2. Stop the Cloudflare tunnel to :3847 and the SSO helper on :3850.
+3. Restore Dify URLs with `./scripts/apply-dify-public-url.sh --localhost`.
+4. Restore the Dify admin password (no longer the shared demo secret).
+5. Disable public Studio access; treat the shared password as compromised.
 
 Studio LLM nodes may still use the lab OpenRouter plugin credential. Walkthrough chat/test uses the visitor’s key and does not require injecting it into Dify.
 

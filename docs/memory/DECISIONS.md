@@ -75,5 +75,6 @@ Append-only. Newest at bottom.
 - **Decision:** Add a single password gate on the Vercel companion (`COLLAB_PASSWORD` / httpOnly cookie). Collaborators bring their own OpenRouter key (sessionStorage + `x-openrouter-key`; never hardcoded). Expose the real Dify Studio canvas via a public HTTPS tunnel to nginx :3847 when the VM allows it. Align Dify admin password to the same temp secret; email remains `lab-admin@example.com`.
 - **Why:** Requested collaborator access to the actual Chatflow editor, not screenshots, without a second distinct password and without embedding operator OpenRouter keys.
 - **Not production:** Shared-password public Studio is demo-only. Class path remains portal IdP → BFF → Service API. Teardown ~**2026-10-06**.
-- **Refs:** `web/src/proxy.ts`, `docs/HANDOFF.md` teardown list, `scripts/tunnel-dify.sh`
+- **SSO:** Walkthrough password cookie issues a 2-minute HMAC ticket; nginx `/collab-sso` (host helper :3850) logs into Dify and writes `localStorage.access_token` so Studio does not ask for a second password.
+- **Refs:** `web/src/proxy.ts`, `scripts/collab-sso-helper.py`, `docs/WEBSITE_INTEGRATION.md`, `docs/HANDOFF.md` teardown list, `scripts/tunnel-dify.sh`
 

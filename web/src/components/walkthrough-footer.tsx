@@ -14,7 +14,7 @@ export function WalkthroughFooter() {
       </p>
       <ul className="list-disc space-y-1 pl-5">
         <li>Remove Vercel env COLLAB_PASSWORD / DEMO_PASSWORD / COLLAB_SESSION_SECRET.</li>
-        <li>Take down the Cloudflare (or other) tunnel to :3847.</li>
+        <li>Take down the Cloudflare (or other) tunnel to :3847 and the SSO helper on :3850.</li>
         <li>
           Restore Dify CONSOLE_WEB_URL and related URLs to http://localhost:3847.
         </li>

@@ -23,6 +23,7 @@ import { Separator } from "@/components/ui/separator";
 import { WalkthroughCanvasCard } from "@/components/walkthrough-canvas";
 import { WalkthroughFaqCard } from "@/components/walkthrough-faq";
 import { WalkthroughFooter } from "@/components/walkthrough-footer";
+import { WalkthroughIntegrateCard } from "@/components/walkthrough-integrate";
 import { WalkthroughKeyCard } from "@/components/walkthrough-key";
 import { WalkthroughMemoryCard } from "@/components/walkthrough-memory";
 import { WalkthroughTestCard } from "@/components/walkthrough-test";
@@ -216,11 +217,11 @@ export function Walkthrough() {
             Dify training lab walkthrough
           </h1>
           <p className="max-w-2xl text-muted-foreground text-pretty">
-            Password gate first, then paste your own OpenRouter key, then open
-            the live Member Benefits FAQ canvas. Dify itself does not run on
-            Vercel — the canvas is the tunneled Studio editor. Chat on this
-            page uses your key via sessionStorage and x-openrouter-key; nothing
-            is hardcoded.
+            One shared password gets you in. Paste your own OpenRouter key to
+            test calls. Open the live Member Benefits FAQ canvas without a
+            second login. Dify is not on Vercel — Studio is tunneled from this
+            lab. Chat on this page uses your key (sessionStorage +
+            x-openrouter-key); nothing is hardcoded.
           </p>
         </div>
         <div className="flex flex-wrap gap-2">
@@ -313,6 +314,7 @@ export function Walkthrough() {
         onClear={clearKey}
       />
       <WalkthroughCanvasCard />
+      <WalkthroughIntegrateCard />
       <WalkthroughTestCard
         storedKey={storedKey}
         loading={testLoading}

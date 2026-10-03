@@ -21,7 +21,7 @@ import {
   FieldLabel,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import { COLLAB_TEARDOWN_DATE, DIFY_ADMIN_EMAIL } from "@/lib/collab-config";
+import { COLLAB_TEARDOWN_DATE } from "@/lib/collab-config";
 
 export function LoginForm() {
   const router = useRouter();
@@ -63,9 +63,9 @@ export function LoginForm() {
         <CardHeader>
           <CardTitle>Collaborator access</CardTitle>
           <CardDescription>
-            One shared password for this demo walkthrough. After sign-in, paste
-            your own OpenRouter key. Demo access expires {COLLAB_TEARDOWN_DATE}
-            .
+            One password for this demo. After Continue you can paste your own
+            OpenRouter key and open the live Dify canvas. Access expires{" "}
+            {COLLAB_TEARDOWN_DATE}.
           </CardDescription>
         </CardHeader>
         <form onSubmit={onSubmit}>
@@ -85,8 +85,8 @@ export function LoginForm() {
                   }}
                 />
                 <FieldDescription>
-                  Same secret as Dify Studio if the console login form appears.
-                  Email: {DIFY_ADMIN_EMAIL}.
+                  Password only — no email on this gate. Opening the canvas
+                  signs you into Studio with the same secret.
                 </FieldDescription>
                 {error ? (
                   <p className="text-sm text-destructive">{error}</p>
