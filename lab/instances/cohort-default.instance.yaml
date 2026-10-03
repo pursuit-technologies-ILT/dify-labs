@@ -1,0 +1,25 @@
+# Default lab instance — local compose + portal placeholders.
+instance_id: cohort-default
+description: Local instructor cohort on Docker lab ports
+environment:
+  dify_public_url: http://localhost:3847
+  portal_base: https://portal.example.internal
+  mock_claims_base: http://127.0.0.1:3860
+  openrouter_model: meta-llama/llama-3.1-8b-instruct
+enabled_lab_tiers:
+  - core
+  - stretch
+  # - instructor  # enable for train-the-trainer
+labs:
+  - catalog_id: m1-l01-member-benefits-faq
+    enabled: true
+  - catalog_id: m2-l01-plan-type-memory
+    enabled: true
+  - catalog_id: m3-l01-claims-status-read
+    enabled: true
+  - catalog_id: m4-l01-incomplete-prior-auth
+    enabled: true
+  - catalog_id: m5-l01-denial-appeal-hitl
+    enabled: true
+  - catalog_id: m6-l01-phi-log-review
+    enabled: true

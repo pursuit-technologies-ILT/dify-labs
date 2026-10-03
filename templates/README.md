@@ -2,6 +2,10 @@
 
 Version-controlled **builder specs** for the 2-day course (*No-Code Agentic AI* — health-plan scenarios). Each file is a blueprint instructors follow in Dify Studio; full DSL YAML exports land here after canvas work is signed off.
 
+**Full lab inventory (30 labs, 5 per module):** [lab-catalog.yaml](./lab-catalog.yaml) — core / stretch / instructor tiers.
+
+**Framework:** [lab/framework/](../lab/framework/) — registry, wiring, extraction, light tests. See [docs/ENGINEERING_CRAFT.md](../docs/ENGINEERING_CRAFT.md).
+
 | File | Module | Studio app | Student portal slug (planned) |
 |------|--------|------------|-------------------------------|
 | [module-01-member-benefits-faq.lab.yaml](./module-01-member-benefits-faq.lab.yaml) | 1 | Chatflow FAQ | `member-benefits-faq` |

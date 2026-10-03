@@ -34,6 +34,16 @@ This plan adds the **builder track**: versioned blueprints, mock tools, and ligh
 
 Do not run multiple `OPENROUTER_LIVE=1` jobs concurrently against the same lab key.
 
+**Catalog (30 labs):** [templates/lab-catalog.yaml](../../templates/lab-catalog.yaml). **Craft:** [ENGINEERING_CRAFT.md](../ENGINEERING_CRAFT.md).
+
+```bash
+./scripts/lab-view.sh              # markdown catalog
+./scripts/lab-view.sh --json
+./scripts/lab-view.sh --extract m3-l01-claims-status-read
+./scripts/lab-wire.sh cohort-default
+./scripts/lab-auto-flow.sh cohort-default
+```
+
 ---
 
 ## Compound loop (one module iteration)

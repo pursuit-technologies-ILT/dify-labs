@@ -1,0 +1,246 @@
+# Teachable lab inventory (4+ per module). Blueprints are capstones; labs are classroom units.
+catalog_version: 1
+course: No-Code Agentic AI (Dify)
+modules:
+  - module: 1
+    title: Introduction to Agentic AI
+    labs:
+      - id: m1-l01-member-benefits-faq
+        title: Member Benefits FAQ (Chat App)
+        tier: core
+        blueprint_id: module-01-member-benefits-faq
+        portal_slug: member-benefits-faq
+        dify_mode: chatflow
+        light_tests:
+          - blueprint_schema
+          - walkthrough_faq_prompt
+      - id: m1-l02-plan-glossary
+        title: Plan glossary bot (definitions only)
+        tier: core
+        dify_mode: chatflow
+        teaching_focus: grounded definitions, no advice
+        light_tests:
+          - catalog_lab_minimum
+      - id: m1-l03-welcome-intake
+        title: Welcome intake — synthetic member_id
+        tier: stretch
+        dify_mode: chatflow
+        teaching_focus: start node, variables, handoff copy
+        light_tests:
+          - catalog_lab_minimum
+      - id: m1-l04-after-hours-reply
+        title: After-hours auto-reply + escalation
+        tier: stretch
+        dify_mode: chatflow
+        teaching_focus: tone, boundaries, when to escalate
+        light_tests:
+          - catalog_lab_minimum
+      - id: m1-l05-ppo-hmo-compare
+        title: Structured PPO vs HMO comparison
+        tier: instructor
+        dify_mode: chatflow
+        teaching_focus: JSON / markdown structured output
+        light_tests:
+          - catalog_lab_minimum
+
+  - module: 2
+    title: Components of an Agentic AI
+    labs:
+      - id: m2-l01-plan-type-memory
+        title: Remember plan type across turns
+        tier: core
+        blueprint_id: module-02-plan-memory
+        portal_slug: member-service-memory
+        dify_mode: chatflow
+        light_tests:
+          - blueprint_schema
+          - walkthrough_memory_turns
+      - id: m2-l02-memory-window-reset
+        title: Memory window — plan switch mid-chat
+        tier: core
+        dify_mode: chatflow
+        teaching_focus: window vs unlimited history
+        light_tests:
+          - catalog_lab_minimum
+      - id: m2-l03-episodic-kb-case
+        title: Episodic memory via KB (prior denial case)
+        tier: stretch
+        dify_mode: chatflow
+        teaching_focus: RAG as episodic store
+        light_tests:
+          - catalog_lab_minimum
+      - id: m2-l04-deductible-tier-var
+        title: Variable assigner — deductible tier
+        tier: stretch
+        dify_mode: chatflow
+        teaching_focus: conversation variables
+        light_tests:
+          - catalog_lab_minimum
+      - id: m2-l05-ooda-annotated-turn
+        title: OODA annotated single turn (worksheet + demo)
+        tier: instructor
+        dify_mode: chatflow
+        teaching_focus: Observe/Orient/Decide/Act mapping
+        light_tests:
+          - catalog_lab_minimum
+
+  - module: 3
+    title: Tool Use and MCP Servers
+    labs:
+      - id: m3-l01-claims-status-read
+        title: Claims status tool (read-only)
+        tier: core
+        blueprint_id: module-03-claims-status
+        portal_slug: claims-status
+        dify_mode: chatflow
+        light_tests:
+          - blueprint_schema
+          - mock_claims_member_m1001
+      - id: m3-l02-prior-auth-lookup
+        title: Prior-auth status lookup
+        tier: core
+        dify_mode: chatflow
+        teaching_focus: second HTTP tool, disambiguation
+        light_tests:
+          - mock_prior_auth_pa9001
+      - id: m3-l03-agent-tool-vs-kb
+        title: Agent chooses tool vs knowledge
+        tier: stretch
+        dify_mode: chatflow
+        teaching_focus: observation vs action
+        light_tests:
+          - catalog_lab_minimum
+      - id: m3-l04-tool-404-graceful
+        title: Graceful 404 when member unknown
+        tier: stretch
+        dify_mode: chatflow
+        teaching_focus: error handling on tools
+        light_tests:
+          - mock_claims_not_found
+      - id: m3-l05-mcp-vs-http-equivalence
+        title: MCP publish vs HTTP tool (concept lab)
+        tier: instructor
+        dify_mode: chatflow
+        teaching_focus: MCP when marketplace allowed
+        light_tests:
+          - catalog_lab_minimum
+
+  - module: 4
+    title: Building Agentic AI Applications
+    labs:
+      - id: m4-l01-incomplete-prior-auth
+        title: Incomplete prior-auth intake
+        tier: core
+        blueprint_id: module-04-prior-auth-intake
+        portal_slug: prior-auth-intake
+        dify_mode: workflow
+        light_tests:
+          - blueprint_schema
+          - prior_auth_incomplete_fixture
+      - id: m4-l02-intent-classifier
+        title: Question classifier — billing vs clinical
+        tier: core
+        dify_mode: chatflow
+        teaching_focus: Question Classifier node
+        light_tests:
+          - catalog_lab_minimum
+      - id: m4-l03-npi-format-validation
+        title: NPI format validation branch
+        tier: stretch
+        dify_mode: workflow
+        teaching_focus: If-Else + code/template
+        light_tests:
+          - catalog_lab_minimum
+      - id: m4-l04-low-confidence-fallback
+        title: Fallback when extraction incomplete
+        tier: stretch
+        dify_mode: workflow
+        teaching_focus: resilient intake
+        light_tests:
+          - catalog_lab_minimum
+      - id: m4-l05-subworkflow-call
+        title: Sub-workflow as reusable intake block
+        tier: instructor
+        dify_mode: workflow
+        teaching_focus: decomposition
+        light_tests:
+          - catalog_lab_minimum
+
+  - module: 5
+    title: Designing Collaborative Agents
+    labs:
+      - id: m5-l01-denial-appeal-hitl
+        title: Denial appeal — human approval gate
+        tier: core
+        blueprint_id: module-05-denial-appeal-hitl
+        portal_slug: denial-appeal
+        dify_mode: workflow
+        light_tests:
+          - blueprint_schema
+          - denial_appeal_fixture
+      - id: m5-l02-monitor-annotation
+        title: Specialist annotation in Monitor
+        tier: core
+        dify_mode: worksheet
+        teaching_focus: logs + annotations
+        light_tests:
+          - catalog_lab_minimum
+      - id: m5-l03-sentiment-escalation
+        title: Escalate on angry sentiment (demo)
+        tier: stretch
+        dify_mode: chatflow
+        teaching_focus: branch to human copy
+        light_tests:
+          - catalog_lab_minimum
+      - id: m5-l04-instructor-approval-queue
+        title: Instructor approval queue walkthrough
+        tier: stretch
+        dify_mode: workflow
+        teaching_focus: Human Input node
+        light_tests:
+          - catalog_lab_minimum
+      - id: m5-l05-student-pending-copy
+        title: Student-facing pending-approval messaging
+        tier: instructor
+        dify_mode: chatflow
+        teaching_focus: portal UX while HITL waits
+        light_tests:
+          - catalog_lab_minimum
+
+  - module: 6
+    title: Ethics and Security
+    labs:
+      - id: m6-l01-phi-log-review
+        title: PHI in prompts and logs (worksheet)
+        tier: core
+        blueprint_id: module-06-ethics-audit
+        dify_mode: worksheet
+        light_tests:
+          - blueprint_schema
+          - audit_rubric_fixture
+      - id: m6-l02-tool-scope-audit
+        title: Tool scope audit (read vs write)
+        tier: core
+        dify_mode: worksheet
+        teaching_focus: excessive agency
+        light_tests:
+          - catalog_lab_minimum
+      - id: m6-l03-red-team-prompts
+        title: Red-team excessive agency prompts
+        tier: stretch
+        dify_mode: worksheet
+        light_tests:
+          - catalog_lab_minimum
+      - id: m6-l04-retention-policy
+        title: Log retention policy checklist
+        tier: stretch
+        dify_mode: worksheet
+        light_tests:
+          - catalog_lab_minimum
+      - id: m6-l05-dsl-secrets-scan
+        title: DSL export secrets leakage review
+        tier: instructor
+        dify_mode: worksheet
+        teaching_focus: export hygiene before git
+        light_tests:
+          - catalog_lab_minimum

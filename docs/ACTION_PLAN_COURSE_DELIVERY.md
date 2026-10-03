@@ -57,9 +57,9 @@ Build once in Studio; export DSL; version in repo under `templates/` (blueprints
 | 5 | Coverage Denial Appeal HITL | Human Input before external act | Appeal packet fixture |
 | 6 | Ethics Audit Pack | Annotation + checklist (not necessarily an agent) | Rubric worksheet |
 
-| # | Action | Output |
-|---|--------|--------|
-| 2.1 | Stand up **mock claims API** (tiny FastAPI/Hono in-repo or wiremock) | OpenAPI + docker service | Done (`services/mock-claims`, `./scripts/lab-light-test.sh`) |
+| # | Action | Output | Status |
+|---|--------|--------|--------|
+| 2.1 | Stand up **mock claims API** (tiny FastAPI/Hono in-repo or wiremock) | OpenAPI + docker service | Done |
 | 2.2 | Build modules 2–5 Apps; export DSL YAML | `templates/module-0N-*.yml` |
 | 2.3 | Knowledge base for benefits (chunk + retrieve settings) | Shared KB attached to M1/M2 |
 | 2.4 | Publish each App; record API keys in secret manager | Portal slug → key map |

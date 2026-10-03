@@ -45,6 +45,10 @@ This repo is an **enterprise training lab** that replaces **n8n** with **self-ho
 | [docs/HOW_TO_OPENROUTER_CANVAS.md](docs/HOW_TO_OPENROUTER_CANVAS.md) | Builder click path |
 | [docs/memory/DECISIONS.md](docs/memory/DECISIONS.md) | Decision log |
 | [docs/SCREENSHOT_PROTOCOL.md](docs/SCREENSHOT_PROTOCOL.md) | Vibium + Chrome screenshot capture |
+| [docs/ENGINEERING_CRAFT.md](docs/ENGINEERING_CRAFT.md) | Modularity, DRY, compound loop |
+| [docs/CONCEPTS.md](docs/CONCEPTS.md) | Vocabulary (blueprint, catalog, instance, wire) |
+| [templates/lab-catalog.yaml](templates/lab-catalog.yaml) | 30 teachable labs (4+ per module) |
+| [docs/solutions/](docs/solutions/) | Compound learnings |
 
 ## Ops commands
 
