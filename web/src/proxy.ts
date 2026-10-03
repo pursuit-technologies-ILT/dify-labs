@@ -3,7 +3,8 @@ import { NextResponse, type NextRequest } from "next/server";
 import { COLLAB_COOKIE_NAME, isValidSessionToken } from "@/lib/collab-auth";
 
 function isPublicPath(pathname: string): boolean {
-  if (pathname === "/login") {
+  // Allow query strings like /login?error=password
+  if (pathname === "/login" || pathname.startsWith("/login/")) {
     return true;
   }
   if (pathname === "/api/auth/login") {
