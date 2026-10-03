@@ -101,10 +101,11 @@ Self-Host → Deploy → Docker Compose is the supported privatized path.
 - [x] OpenRouter provider active; light model callable  
 - [x] Sample Chatflow **Member Benefits FAQ** on canvas  
 - [ ] App API key created and stored for portal BFF  
-- [ ] Mock claims/prior-auth HTTP tool available  
+- [x] Mock claims/prior-auth HTTP tool available (`services/mock-claims`, port 3860)  
 - [ ] Portal BFF prototype (`user` isolation verified)  
 - [ ] Custom-domain env template for target site  
 - [ ] Module 1–6 instructor runbooks + trainee DSL exports  
+- [x] Module 1–6 builder blueprints (`templates/*.lab.yaml`) + light tests  
 
 ## 8. Risks & mitigations
 

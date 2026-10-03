@@ -22,6 +22,7 @@ import {
 import { Skeleton } from "@/components/ui/skeleton";
 import { Spinner } from "@/components/ui/spinner";
 import { OPENROUTER_MODEL } from "@/lib/openrouter";
+import { walkthroughPanelClassName } from "@/lib/walkthrough-panel";
 import type { TestResult } from "@/lib/walkthrough-client";
 
 type WalkthroughTestCardProps = {
@@ -76,17 +77,21 @@ export function WalkthroughTestCard({
           </Alert>
         ) : null}
         {result ? (
-          <Alert>
-            <PlugZapIcon />
-            <AlertTitle>Connected</AlertTitle>
-            <AlertDescription>
+          <div className={walkthroughPanelClassName()} role="status">
+            <p className="mb-2 flex items-center gap-2 font-medium text-foreground dark:text-white">
+              <PlugZapIcon className="size-4 shrink-0" />
+              Connected
+            </p>
+            <p className="text-foreground/90 dark:text-white/95">
               Catalog returned {result.modelCount} models
               {result.hasLabModel
                 ? `; ${OPENROUTER_MODEL} is available.`
-                : `; ${OPENROUTER_MODEL} was not listed, but the ping still ran.`}{" "}
+                : `; ${OPENROUTER_MODEL} was not listed, but the ping still ran.`}
+            </p>
+            <p className="mt-2 font-mono text-xs text-foreground dark:text-white">
               Ping reply: {result.snippet || "(empty)"}
-            </AlertDescription>
-          </Alert>
+            </p>
+          </div>
         ) : null}
       </CardContent>
       <CardFooter>

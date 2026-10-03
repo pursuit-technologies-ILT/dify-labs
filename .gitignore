@@ -36,6 +36,10 @@ agent-tools/
 artifacts/screenshots/
 # Keep curated worksheet mirrors under docs/lab-materials/screenshots/ tracked when small
 
+# Studio DSL exports before review
+templates/exports/*
+!templates/exports/.gitkeep
+
 # Vibium local install under tools/vibium (commit sources + lockfile; not node_modules)
 tools/vibium/node_modules/
 

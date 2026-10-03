@@ -1,0 +1,38 @@
+# Blueprint — Module 1 (exists on lab canvas; export pending)
+id: module-01-member-benefits-faq
+module: 1
+title: Member Benefits FAQ
+portal_slug: member-benefits-faq
+dify_app:
+  mode: chatflow
+  publish: api_and_web
+model:
+  provider: openrouter
+  model_id: meta-llama/llama-3.1-8b-instruct
+nodes:
+  - id: start
+    type: start
+    label: User Input
+  - id: kb
+    type: knowledge_retrieval
+    label: Benefits FAQ (optional)
+    optional: true
+  - id: llm
+    type: llm
+    label: Member Benefits FAQ
+    system_prompt_ref: web/src/lib/openrouter.ts#MEMBER_BENEFITS_SYSTEM
+  - id: answer
+    type: answer
+    label: Reply
+knowledge:
+  dataset: benefits-faq-synthetic
+  optional: true
+acceptance:
+  light_tests:
+    - id: blueprint_schema
+    - id: walkthrough_faq_prompt
+  studio:
+    - Multi-turn FAQ answers PPO vs HMO without contradicting lab facts
+    - Publish → API key stored outside git
+  portal:
+    - BFF sends user=student:<id>; student never opens Studio

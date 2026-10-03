@@ -1,0 +1,34 @@
+id: module-05-denial-appeal-hitl
+module: 5
+title: Coverage Denial Appeal (HITL)
+portal_slug: denial-appeal
+dify_app:
+  mode: workflow
+model:
+  provider: openrouter
+  model_id: meta-llama/llama-3.1-8b-instruct
+nodes:
+  - id: start
+    type: start
+  - id: draft_packet
+    type: llm
+    label: Draft appeal summary
+  - id: human_review
+    type: human_input
+    label: Specialist approval before external send
+  - id: external_act
+    type: http_request
+    label: Mock external appeal submit
+    gated_by: human_review.approved
+  - id: answer
+    type: answer
+fixtures:
+  denial_case: templates/fixtures/denial-appeal-case.json
+acceptance:
+  light_tests:
+    - id: blueprint_schema
+    - id: denial_appeal_fixture
+  studio:
+    - Run pauses at Human Input until instructor approves in Monitor
+  portal:
+    - Student sees status message while awaiting approval

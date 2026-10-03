@@ -1,0 +1,18 @@
+services:
+  mock-claims:
+    image: node:22-alpine
+    working_dir: /app
+    command: ["node", "services/mock-claims/server.mjs"]
+    volumes:
+      - ./:/app:ro
+    environment:
+      MOCK_CLAIMS_PORT: "3860"
+    ports:
+      - "${MOCK_CLAIMS_HOST_PORT:-3860}:3860"
+    networks:
+      - lab_net
+
+networks:
+  lab_net:
+    external: true
+    name: lab_net

@@ -19,6 +19,7 @@ import {
 import { Skeleton } from "@/components/ui/skeleton";
 import { Spinner } from "@/components/ui/spinner";
 import type { TranscriptLine } from "@/lib/walkthrough-client";
+import { walkthroughPanelClassName } from "@/lib/walkthrough-panel";
 
 type WalkthroughMemoryCardProps = {
   storedKey: string | null;
@@ -73,12 +74,12 @@ export function WalkthroughMemoryCard({
         {lines.map((line, index) => (
           <div
             key={`${line.role}-${index}`}
-            className="rounded-lg border p-3 text-sm"
+            className={walkthroughPanelClassName()}
           >
-            <p className="mb-1 font-medium">
+            <p className="mb-1 font-medium text-foreground dark:text-white">
               {line.role === "user" ? "Member" : "FAQ agent"}
             </p>
-            <p className="text-muted-foreground whitespace-pre-wrap">
+            <p className="whitespace-pre-wrap text-foreground/90 dark:text-white/95">
               {line.content}
             </p>
           </div>

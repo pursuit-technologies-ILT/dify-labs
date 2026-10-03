@@ -1,0 +1,42 @@
+openapi: 3.0.3
+info:
+  title: Dify Lab Mock Claims API
+  version: 0.1.0
+  description: Synthetic claims and prior-auth lookups for Module 3–5 builder labs.
+servers:
+  - url: http://mock-claims:3860
+paths:
+  /health:
+    get:
+      operationId: health
+      responses:
+        "200":
+          description: OK
+  /v1/claims/{memberId}:
+    get:
+      operationId: getClaimByMemberId
+      parameters:
+        - name: memberId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Claim summary
+        "404":
+          description: Unknown member
+  /v1/prior-auth/{authId}:
+    get:
+      operationId: getPriorAuthById
+      parameters:
+        - name: authId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Prior auth status
+        "404":
+          description: Unknown auth id

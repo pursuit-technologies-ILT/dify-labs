@@ -20,6 +20,7 @@ import { Field, FieldGroup, FieldLabel } from "@/components/ui/field";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Spinner } from "@/components/ui/spinner";
 import { Textarea } from "@/components/ui/textarea";
+import { walkthroughPanelClassName } from "@/lib/walkthrough-panel";
 
 type WalkthroughFaqCardProps = {
   storedKey: string | null;
@@ -85,7 +86,7 @@ export function WalkthroughFaqCard({
             </Alert>
           ) : null}
           {reply ? (
-            <div className="rounded-lg border bg-muted/40 p-4 text-sm whitespace-pre-wrap">
+            <div className={walkthroughPanelClassName()} role="region" aria-label="FAQ reply">
               {reply}
             </div>
           ) : null}

@@ -9,6 +9,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { walkthroughCodePanelClassName } from "@/lib/walkthrough-panel";
 
 export function WalkthroughIntegrateCard() {
   return (
@@ -28,7 +29,7 @@ export function WalkthroughIntegrateCard() {
           Publish the Chatflow in Studio, create an App API key, keep that key
           on the server. The browser never holds the Dify key.
         </p>
-        <pre className="overflow-x-auto rounded-lg bg-muted p-3 font-mono text-xs text-foreground">
+        <pre className={walkthroughCodePanelClassName()}>
 {`POST {DIFY}/v1/chat-messages
 Authorization: Bearer <DIFY_APP_API_KEY>
 Content-Type: application/json

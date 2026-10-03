@@ -1,0 +1,35 @@
+id: module-02-plan-memory
+module: 2
+title: Member Service + Plan Memory
+portal_slug: member-service-memory
+dify_app:
+  mode: chatflow
+model:
+  provider: openrouter
+  model_id: meta-llama/llama-3.1-8b-instruct
+nodes:
+  - id: start
+    type: start
+  - id: assign_plan
+    type: variable_assigner
+    label: Capture plan_type
+    variables:
+      - name: plan_type
+        source: llm_extraction_or_user
+  - id: llm
+    type: llm
+    label: Member service agent
+    memory:
+      window: 10
+      conversation_variables:
+        - plan_type
+  - id: answer
+    type: answer
+acceptance:
+  light_tests:
+    - id: blueprint_schema
+    - id: walkthrough_memory_turns
+  studio:
+    - Turn 1 states HDHP; turn 2 deductible question uses HDHP without re-ask
+  portal:
+    - Same app slug; histories isolated per student id

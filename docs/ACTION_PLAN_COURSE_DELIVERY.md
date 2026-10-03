@@ -46,7 +46,7 @@ Transforms the n8n outline into a sequenced delivery plan. Pair with [SPEC_CAPAB
 
 ## Phase 2 — Module template factory (builders)
 
-Build once in Studio; export DSL; version in repo under `templates/` (todo).
+Build once in Studio; export DSL; version in repo under `templates/` (blueprints landed — see [plans/NODE_BUILDER_LABS.md](./plans/NODE_BUILDER_LABS.md)).
 
 | Module | Template to build | Key nodes | Synthetic data |
 |--------|-------------------|-----------|----------------|
@@ -59,7 +59,7 @@ Build once in Studio; export DSL; version in repo under `templates/` (todo).
 
 | # | Action | Output |
 |---|--------|--------|
-| 2.1 | Stand up **mock claims API** (tiny FastAPI/Hono in-repo or wiremock) | OpenAPI + docker service |
+| 2.1 | Stand up **mock claims API** (tiny FastAPI/Hono in-repo or wiremock) | OpenAPI + docker service | Done (`services/mock-claims`, `./scripts/lab-light-test.sh`) |
 | 2.2 | Build modules 2–5 Apps; export DSL YAML | `templates/module-0N-*.yml` |
 | 2.3 | Knowledge base for benefits (chunk + retrieve settings) | Shared KB attached to M1/M2 |
 | 2.4 | Publish each App; record API keys in secret manager | Portal slug → key map |

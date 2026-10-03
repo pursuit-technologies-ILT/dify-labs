@@ -1,0 +1,20 @@
+id: module-06-ethics-audit
+module: 6
+title: Ethics & Security Audit Pack
+portal_slug: null
+dify_app:
+  mode: worksheet
+artifacts:
+  - docs/runbooks/module-06-ethics.md
+  - templates/fixtures/audit-rubric.json
+checklist:
+  - PHI in prompts, KB chunks, and conversation logs
+  - Tool scopes read-only vs action; excessive agency
+  - Who can edit Apps vs chat-only portal users
+  - SSRF / sandbox boundaries (lab compose)
+acceptance:
+  light_tests:
+    - id: blueprint_schema
+    - id: audit_rubric_fixture
+  delivery:
+    - Instructor walks Monitor annotations; students complete rubric

@@ -1,0 +1,9 @@
+{
+  "categories": [
+    "data_handling",
+    "tool_scope",
+    "access_control",
+    "logging_retention"
+  ],
+  "pass_threshold": 3
+}

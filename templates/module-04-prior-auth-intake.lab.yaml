@@ -1,0 +1,42 @@
+id: module-04-prior-auth-intake
+module: 4
+title: Prior-Auth Intake (incomplete submission)
+portal_slug: prior-auth-intake
+dify_app:
+  mode: workflow
+model:
+  provider: openrouter
+  model_id: meta-llama/llama-3.1-8b-instruct
+nodes:
+  - id: start
+    type: start
+  - id: extract
+    type: parameter_extractor
+    label: Intake fields
+    required_fields:
+      - member_id
+      - procedure_code
+      - ordering_provider_npi
+  - id: validate
+    type: if_else
+    label: Missing required fields?
+  - id: clarify
+    type: llm
+    label: Ask clarifying questions
+    branch: missing
+  - id: submit_mock
+    type: http_request
+    label: POST prior-auth intake (mock)
+    branch: complete
+  - id: answer
+    type: answer
+fixtures:
+  incomplete_payload: templates/fixtures/prior-auth-incomplete.json
+acceptance:
+  light_tests:
+    - id: blueprint_schema
+    - id: prior_auth_incomplete_fixture
+  studio:
+    - Incomplete JSON triggers clarify branch, not silent failure
+  portal:
+    - Student sees conversational repair loop

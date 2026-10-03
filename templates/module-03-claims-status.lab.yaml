@@ -1,0 +1,37 @@
+id: module-03-claims-status
+module: 3
+title: Claims Status Agent
+portal_slug: claims-status
+dify_app:
+  mode: chatflow
+model:
+  provider: openrouter
+  model_id: meta-llama/llama-3.1-8b-instruct
+tools:
+  - id: claims_lookup
+    type: http
+    openapi_ref: services/mock-claims/openapi.yaml
+    operation: getClaimByMemberId
+  - id: prior_auth_lookup
+    type: http
+    openapi_ref: services/mock-claims/openapi.yaml
+    operation: getPriorAuthById
+nodes:
+  - id: start
+    type: start
+  - id: agent
+    type: agent
+    label: Claims assistant
+    tools: [claims_lookup, prior_auth_lookup]
+  - id: answer
+    type: answer
+acceptance:
+  light_tests:
+    - id: blueprint_schema
+    - id: mock_claims_member_m1001
+    - id: mock_prior_auth_pa9001
+  studio:
+    - Agent calls mock API for member M1001 and PA-9001 fixtures
+    - Teaches observation (read) vs action (no payment posting)
+  portal:
+    - Tool URLs point at mock service on lab network
