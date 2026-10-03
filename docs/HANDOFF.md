@@ -130,7 +130,7 @@ From [ACTION_PLAN_COURSE_DELIVERY.md](./ACTION_PLAN_COURSE_DELIVERY.md) (verify 
 | P2 | Mock claims API for agent/HTTP labs |
 | P3 | Instructor runbooks + student worksheets pack |
 
-**Public GitHub showcase:** see [PUBLIC_REPO.md](./PUBLIC_REPO.md) if this clone is still on a temporary Origin remote.
+**GitHub + Origin:** you can have both. Official live sync is **GitHub → Origin inbound mirror** (GitHub stays source of truth). The existing Origin repo `manutej/dify-labs` is **Origin-hosted** (`mirrorStatus: no-mirror`) and cannot be flipped to a GitHub mirror in place. This agent **did not** create a GitHub repo. Unblock: `gh repo create` on your machine, then either Sync from GitHub in the Origin UI or dual remotes + `./scripts/sync-github.sh`. Details: [PUBLIC_REPO.md](./PUBLIC_REPO.md).
 
 ---
 
@@ -138,7 +138,7 @@ From [ACTION_PLAN_COURSE_DELIVERY.md](./ACTION_PLAN_COURSE_DELIVERY.md) (verify 
 
 1. **Portal BFF wiring** — implement Service API proxy + tenancy proof (two students, separate histories).  
 2. **Module template factory** — build/export Modules 2–5 DSL + mock claims API.  
-3. **Publish to GitHub** — follow [PUBLIC_REPO.md](./PUBLIC_REPO.md) then push `main`.  
+3. **Publish to GitHub** — you must create the GitHub repo (`gh` / GitHub UI); then Path A (Sync from GitHub) or Path B (`git remote add github` + `./scripts/sync-github.sh`). See [PUBLIC_REPO.md](./PUBLIC_REPO.md).  
 4. **Screenshot pack expansion** — extend shot list and regenerate curated PNGs.
 
 ```text

@@ -62,3 +62,10 @@ Append-only. Newest at bottom.
 - **Blocker (agent session):** `gh` unauthenticated; Origin token scoped to temp private repo (cannot `origin repo create`); Origin visibility has no `public`; no GitHub SSH. Documented unblock steps in `docs/PUBLIC_REPO.md`.
 - **Also:** Vercel Publish button hidden — Docker Compose lab is not a Vercel web app.
 - **Refs:** `docs/HANDOFF.md`, `docs/PUBLIC_REPO.md`, `README.md`
+
+## 2026-10-03 — Origin + GitHub together (no in-place Origin→GitHub auto-mirror)
+
+- **Decision:** Keep **Origin-hosted** `manutej/dify-labs` as the current private SoT. Add a **public GitHub** repo (`manutej/dify-labs` preferred, `dify-training-lab` fallback) created by the user. Sync options: (A) GitHub-first **inbound mirror** via Sync from GitHub / `origin repo create-mirrored` (GitHub SoT; new Origin copy); (B) dual remotes `origin` + `github` and `scripts/sync-github.sh` (manual Origin→GitHub).
+- **Why:** `origin repo view` shows `mirrorStatus: no-mirror`, `githubInstallationId: null`. `origin repo mirror transition --to inbound|outbound` refuses from `no-mirror`. Origin CLI/API support inbound GitHub→Origin live sync, not converting this Origin-only repo into an outbound GitHub push-mirror. Cloud agent still cannot `gh repo create` (no GitHub login / token).
+- **Do not claim:** a GitHub URL exists until the user (or a `GITHUB_TOKEN`) creates it and a browser/API check returns 200.
+- **Refs:** `docs/PUBLIC_REPO.md`, https://cursor.com/docs/origin/mirror-github

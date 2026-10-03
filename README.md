@@ -62,7 +62,7 @@ Full topology, compose footprint, and scale notes: [docs/ARCHITECTURE.md](docs/A
 | Start here | Path |
 |------------|------|
 | **Handoff (share this)** | [docs/HANDOFF.md](docs/HANDOFF.md) |
-| Public GitHub publish steps | [docs/PUBLIC_REPO.md](docs/PUBLIC_REPO.md) |
+| GitHub + Origin (mirror vs dual remotes) | [docs/PUBLIC_REPO.md](docs/PUBLIC_REPO.md) |
 | Agent / project memory | [AGENTS.md](AGENTS.md) |
 | Docs index | [docs/README.md](docs/README.md) |
 | Architecture | [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) |

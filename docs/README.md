@@ -7,7 +7,7 @@ Read in this order when onboarding or publishing the repo.
 | Layer | Doc | Purpose |
 |-------|-----|---------|
 | 0. Handoff | [HANDOFF.md](HANDOFF.md) | Shareable continuity: run, architecture, tenancy, screenshots, next steps |
-| 0b. Public repo | [PUBLIC_REPO.md](PUBLIC_REPO.md) | How to publish a public GitHub showcase under `manutej` |
+| 0b. Public repo | [PUBLIC_REPO.md](PUBLIC_REPO.md) | GitHub + Origin: inbound mirror vs dual remotes (`scripts/sync-github.sh`) |
 | 1. Memory | [../AGENTS.md](../AGENTS.md) | Non-negotiables, stack roles, ops commands |
 | 2. Architecture | [ARCHITECTURE.md](ARCHITECTURE.md) | Topology, compose footprint, scale, secrets |
 | 3. Spec | [SPEC_CAPABILITIES.md](SPEC_CAPABILITIES.md) | What Dify CE delivers for this course |
@@ -35,5 +35,6 @@ Read in this order when onboarding or publishing the repo.
 | `scripts/up.sh` / `down.sh` / `status.sh` | Start / stop / probe |
 | `scripts/lib.sh` | Shared env / overlay helpers |
 | `scripts/screenshots/capture-lab.sh` | Vibium + Chrome lab screenshots |
+| `scripts/sync-github.sh` | Push current branch to Origin, then to `github` remote if present |
 
 Default `LAB_MODE=dify`. Ports **3847** (Dify) and **3848** (Open WebUI).
