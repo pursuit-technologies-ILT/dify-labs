@@ -4,6 +4,20 @@ Self-hosted **[Dify](https://dify.ai) Community Edition 1.17.1** for enterprise 
 
 Optional Open WebUI is available for demos; it is not the class delivery path.
 
+## Public walkthrough (no Docker)
+
+Dify cannot run on Vercel. Collaborators can still exercise the **OpenRouter + Member Benefits FAQ** story in a companion Next.js app under `web/` (no Compose, no Studio canvas).
+
+```bash
+cd web
+npm install
+npm run dev -- --port 3849
+```
+
+Paste a key from [openrouter.ai/keys](https://openrouter.ai/keys). The key stays in the browser (`sessionStorage`) and is sent per request as `x-openrouter-key` to a Route Handler that proxies OpenRouter and does not store the key.
+
+Public demo URL: *(added after Vercel deploy)*
+
 ## Quickstart
 
 ```bash
