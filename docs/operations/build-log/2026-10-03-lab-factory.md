@@ -8,7 +8,8 @@
 |-----|-------|-------|--------|
 | 2026-10-03T23:10Z | S0 | builder | `3ed4c54` — mock claims + module blueprints + light tests |
 | 2026-10-03T23:13Z | S0 | builder | `b0c33c4` — lab framework, 30-lab catalog, CE craft + solutions |
-| 2026-10-03T23:20Z | S0 | monitor | programme-gate scaffold added — pending independent SHIP for S0 |
+| 2026-10-03T23:20Z | S0 | monitor | programme-gate scaffold added |
+| 2026-10-03T23:22Z | S0 | independent | **SHIP** — [eval](../evaluations/2026-10-03-S0-framework-independent.md); checklist S0 done |
 
 ---
 
