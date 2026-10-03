@@ -27,6 +27,7 @@ vendor/dify/docker/nginx/conf.d/default.conf
 *.log
 /swapfile
 .local/
+**/__pycache__/
 agent-tools/
 .playwright/
 .cache/
