@@ -141,16 +141,16 @@
   .dark input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="file"]),
   .dark textarea,
   .dark select {
-    background-color: oklch(0.32 0 0) !important;
-    border-color: oklch(1 0 0 / 55%) !important;
+    background-color: oklch(0.38 0 0) !important;
+    border-color: oklch(1 0 0 / 70%) !important;
     color: oklch(0.99 0 0) !important;
     caret-color: oklch(0.99 0 0);
-    box-shadow: inset 0 0 0 1px oklch(1 0 0 / 12%);
+    box-shadow: inset 0 0 0 1px oklch(1 0 0 / 18%);
   }
 
   .dark input::placeholder,
   .dark textarea::placeholder {
-    color: oklch(0.86 0 0 / 80%) !important;
+    color: oklch(0.9 0 0 / 85%) !important;
   }
 
   .dark input:-webkit-autofill,
@@ -158,7 +158,7 @@
   .dark input:-webkit-autofill:focus {
     -webkit-text-fill-color: oklch(0.99 0 0);
     caret-color: oklch(0.99 0 0);
-    box-shadow: 0 0 0 1000px oklch(0.32 0 0) inset;
+    box-shadow: 0 0 0 1000px oklch(0.38 0 0) inset;
     transition: background-color 9999s ease-in-out 0s;
   }
 }
