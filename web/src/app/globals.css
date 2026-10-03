@@ -84,6 +84,7 @@
 }
 
 .dark {
+  color-scheme: dark;
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.205 0 0);
@@ -95,13 +96,14 @@
   --secondary: oklch(0.269 0 0);
   --secondary-foreground: oklch(0.985 0 0);
   --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
+  --muted-foreground: oklch(0.78 0 0);
   --accent: oklch(0.269 0 0);
   --accent-foreground: oklch(0.985 0 0);
   --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
+  /* Stronger field chrome so inputs don't disappear on dark cards */
+  --border: oklch(1 0 0 / 28%);
+  --input: oklch(1 0 0 / 22%);
+  --ring: oklch(0.72 0 0);
   --chart-1: oklch(0.87 0 0);
   --chart-2: oklch(0.556 0 0);
   --chart-3: oklch(0.439 0 0);
@@ -126,5 +128,34 @@
   }
   html {
     @apply font-sans;
+  }
+
+  /* Native controls: solid field surface + readable text in dark mode */
+  input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="file"]),
+  textarea,
+  select {
+    @apply bg-background text-foreground caret-foreground;
+  }
+
+  .dark input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="file"]),
+  .dark textarea,
+  .dark select {
+    background-color: oklch(0.16 0 0);
+    border-color: oklch(1 0 0 / 38%);
+    color: oklch(0.98 0 0);
+  }
+
+  .dark input::placeholder,
+  .dark textarea::placeholder {
+    color: oklch(0.78 0 0 / 75%);
+  }
+
+  .dark input:-webkit-autofill,
+  .dark input:-webkit-autofill:hover,
+  .dark input:-webkit-autofill:focus {
+    -webkit-text-fill-color: oklch(0.98 0 0);
+    caret-color: oklch(0.98 0 0);
+    box-shadow: 0 0 0 1000px oklch(0.16 0 0) inset;
+    transition: background-color 9999s ease-in-out 0s;
   }
 }

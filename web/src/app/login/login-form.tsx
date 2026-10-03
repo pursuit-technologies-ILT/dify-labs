@@ -67,7 +67,7 @@ export function LoginForm() {
               type="password"
               required
               autoComplete="current-password"
-              className="h-10 w-full rounded-lg border border-input bg-background px-3 text-base text-foreground outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 md:text-sm"
+              className="h-10 w-full rounded-lg border border-input bg-background px-3 text-base text-foreground outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 md:text-sm dark:border-white/40 dark:bg-black/40 dark:text-white dark:placeholder:text-white/60"
             />
             <p className="text-sm text-muted-foreground">
               Password only — no email. Then paste your own OpenRouter key and
