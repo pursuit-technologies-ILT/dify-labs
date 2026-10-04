@@ -9,7 +9,7 @@ Deliver **30 catalog labs** + **6 capstone blueprints** + instructor runbooks wi
 | ID | Item | Gate | Status |
 |----|------|------|--------|
 | S0 | Lab framework + 30-lab catalog + mock claims + craft docs | `./scripts/programme-gate.sh` | **done (eval SHIP)** — [eval](../operations/evaluations/2026-10-03-S0-framework-independent.md) |
-| S1 | Runbooks for M1–M3 **core** catalog labs | Spec gates in [S1 build spec](./build-specs/S1-runbooks-m1-m3-core.md) | pending |
+| S1 | Runbooks for M1–M3 **core** catalog labs | Spec gates in [S1 build spec](./build-specs/S1-runbooks-m1-m3-core.md) | **builder complete; pending eval SHIP** |
 | S2 | Studio DSL exports for M2–M4 **core** (promote from `templates/exports/`) | Light tests + export files present | pending |
 | S3 | Portal wire contract doc from `./scripts/lab-wire.sh` | BFF contract markdown + slug map | pending |
 | S4 | Stretch tier enabled in `cohort-advanced.instance.yaml` | Instance + auto-flow steps | pending |
