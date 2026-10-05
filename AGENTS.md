@@ -42,6 +42,8 @@ For multi-slice roadmaps (lab factory, portal wiring, DSL waves):
 
 | Doc | Purpose |
 |-----|---------|
+| [HANDOFFs.md](HANDOFFs.md) | Colleague-facing index (status, run, GitHub handoff) |
+| [llms.txt](llms.txt) | Agent brief at repo root |
 | [docs/HANDOFF.md](docs/HANDOFF.md) | Shareable handoff (run, tenancy, screenshots, next steps) |
 | [docs/PUBLIC_REPO.md](docs/PUBLIC_REPO.md) | GitHub + Origin: inbound mirror vs dual remotes |
 | [docs/README.md](docs/README.md) | Docs index / hierarchy |

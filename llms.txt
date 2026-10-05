@@ -1,0 +1,107 @@
+# Dify Training Lab — agent brief
+# Canonical human handoff index: HANDOFFs.md
+# Long-form continuity: docs/HANDOFF.md
+# Project memory & non-negotiables: AGENTS.md
+# Docs index: docs/README.md
+
+## Purpose
+
+Enterprise training lab replacing n8n with self-hosted Dify CE 1.17.1 for the 2-day course
+"No-Code Agentic AI: Building Business Automation" (health-insurance scenarios).
+Builders use Dify Studio; students use portal BFF → Dify Service API (user=portal_student_id).
+Optional Open WebUI (:3848) is demo-only, not the class path.
+
+## Non-negotiables
+
+- n8n is unapproved — do not reintroduce.
+- Minimize student logins; portal is the only student IdP.
+- LLM keys only from operator (.env / portal secrets); never commit secrets.
+- Pinned Dify 1.17.1 under vendor/dify/docker (vendor/DIFY_VERSION).
+- Lab ports: Dify 3847, Open WebUI 3848, mock claims 3860.
+- Browser: use localhost (not 127.0.0.1) for Studio auth cookies.
+
+## Key paths
+
+AGENTS.md              — durable project memory, ops commands
+HANDOFFs.md            — colleague-facing index (status, run, GitHub)
+docs/HANDOFF.md        — detailed handoff (tenancy, screenshots, teardown)
+docs/PUBLIC_REPO.md    — GitHub + Origin mirror vs dual remotes
+docs/ARCHITECTURE.md   — topology, compose, scale
+docs/README.md         — documentation hierarchy
+templates/lab-catalog.yaml — 30 catalog labs
+lab/                   — compose overlays, tests, instances
+scripts/               — up.sh, status.sh, programme-gate.sh, sync-github.sh
+web/                   — Vercel walkthrough (collab demo; not student path)
+tools/vibium/          — screenshot capture for lab materials
+vendor/dify/docker/    — pinned Dify compose tree
+
+## Active programme (compound build)
+
+Tracker: docs/operations/LAB-FACTORY-CHECKLIST.md
+SOP: docs/operations/COMPOUND-BUILD-SOP.md
+Skill: skills/compound-build-loop/SKILL.md
+
+Status (checklist):
+  S0 framework + catalog + mock claims — done (eval SHIP)
+  S1 M1–M3 core runbooks — done (eval SHIP)
+  S2 DSL exports M2–M4 core — pending
+  S3 portal wire contract — pending
+  S4 stretch tier instance — pending
+  S5 bundle doc sync — pending
+  Integration PR — hold until S0–S5 SHIP + programme gate green
+
+Rules: implementers must not self-SHIP; one integrator runs OPENROUTER_LIVE=1
+when slice eval requires live OpenRouter (no parallel live calls).
+
+## Gates
+
+./scripts/programme-gate.sh
+  → lab-light-test.sh (mock claims :3860, catalog checks)
+  → web npm run lint
+  → optional OPENROUTER_LIVE=1 integrator ping
+
+Slice defaults (unless build spec says docs-only):
+  ./scripts/lab-light-test.sh
+  cd web && npm run lint
+
+Pre-bundle: programme-gate on integration branch tip (see COMPOUND-BUILD-SOP).
+
+## Runbooks & catalog & framework
+
+Catalog: templates/lab-catalog.yaml
+Runbooks: docs/lab-materials/ (module runbooks per S1 spec)
+Framework: lab/ instances, lab-wire.sh, mock claims under lab/
+Build log: docs/operations/build-log/
+Evaluations: docs/operations/evaluations/
+
+## Ops (operator)
+
+cp .env.example .env   # OPENROUTER_API_KEY=
+./scripts/ensure-docker.sh
+./scripts/up.sh
+./scripts/status.sh
+
+LAB_MODE: dify (default) | full (Dify + WebUI) | webui
+
+## GitHub handoff
+
+Origin (private SoT today for named repo): manutej/dify-labs on Origin; mirrorStatus no-mirror.
+Public GitHub repo not auto-created by agents without gh auth / GITHUB_TOKEN.
+Dual-remote push: ./scripts/sync-github.sh (after git remote add github …).
+Details: docs/PUBLIC_REPO.md, HANDOFFs.md § GitHub sharing.
+
+## Walkthrough / teardown note
+
+Public walkthrough: dify-labs-walkthrough.vercel.app — demo-only, shared password, BYO OpenRouter key.
+Teardown target ~2026-10-06: remove Vercel secrets, stop tunnel :3847 / SSO :3850, restore localhost URLs.
+See docs/HANDOFF.md collaborator section.
+
+## Sample provisioned app (local runtime)
+
+Member Benefits FAQ — Chatflow advanced-chat; Start → LLM → Answer;
+model meta-llama/llama-3.1-8b-instruct via OpenRouter plugin.
+Editor path is environment-local; see AGENTS.md.
+
+## External Dify docs
+
+Prefer Context7 for library docs when quota allows; else https://docs.dify.ai/llms.txt and docs/REFERENCE_LINKS.md

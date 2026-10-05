@@ -4,6 +4,8 @@
 **Captured:** 2026-10-02 · branch `main` · Dify CE **1.17.1**  
 **Intent (user):** showcase-ready public repo + continuity handoff for the self-hosted Dify lab (n8n replacement).
 
+**Colleague index:** start at [../HANDOFFs.md](../HANDOFFs.md) (programme status, local run, walkthrough teardown, GitHub steps). Agents: [../llms.txt](../llms.txt). To publish on GitHub while Origin stays source of truth, authenticate with `gh auth login`, create `manutej/dify-labs` (or use the GitHub UI), `git remote add github …`, then `./scripts/sync-github.sh` — full Path A/B in [PUBLIC_REPO.md](./PUBLIC_REPO.md).
+
 ---
 
 ## What this project is

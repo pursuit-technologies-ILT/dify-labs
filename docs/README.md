@@ -6,6 +6,8 @@ Read in this order when onboarding or publishing the repo.
 
 | Layer | Doc | Purpose |
 |-------|-----|---------|
+| 0a. Colleague index | [../HANDOFFs.md](../HANDOFFs.md) | Status, local run, walkthrough/GitHub sharing for colleagues |
+| 0b. Agent brief | [../llms.txt](../llms.txt) | Dense llms.txt brief (purpose, gates, programme slice) |
 | 0. Handoff | [HANDOFF.md](HANDOFF.md) | Shareable continuity: run, architecture, tenancy, screenshots, next steps |
 | 0c. Website BFF | [WEBSITE_INTEGRATION.md](WEBSITE_INTEGRATION.md) | How developers wire Dify into the shared portal |
 | 1. Memory | [../AGENTS.md](../AGENTS.md) | Non-negotiables, stack roles, ops commands |
