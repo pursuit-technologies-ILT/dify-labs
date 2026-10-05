@@ -4,6 +4,8 @@ Self-hosted **[Dify](https://dify.ai) Community Edition 1.17.1** for enterprise 
 
 Optional Open WebUI is available for demos; it is not the class delivery path.
 
+**Colleague handoff:** [HANDOFFs.md](HANDOFFs.md) (status, GitHub publish, runbook) · [llms.txt](llms.txt) (agent brief) · [docs/HANDOFF.md](docs/HANDOFF.md) (full continuity)
+
 ## Public walkthrough (Vercel)
 
 Dify cannot run on Vercel. The companion Next.js app under `web/` has a **single password gate**, then BYO OpenRouter key, then a deep-link (and iframe when allowed) to the **live Studio canvas** when a tunnel URL is configured.
