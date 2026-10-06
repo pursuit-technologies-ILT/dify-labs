@@ -22,9 +22,18 @@ docker_daemon_ok() {
   docker info >/dev/null 2>&1
 }
 
+docker_daemon_hint() {
+  if [[ "$(uname -s)" == "Darwin" ]]; then
+    echo "error: Docker daemon is not running. Open Docker Desktop, then ./scripts/up.sh" >&2
+    echo "hint: docs/runbooks/TROUBLESHOOTING-MACOS.md" >&2
+  else
+    echo "error: Docker daemon is not running. Try: ./scripts/ensure-docker.sh" >&2
+  fi
+}
+
 ensure_lab_net() {
   if ! docker_daemon_ok; then
-    echo "error: Docker daemon is not running. Try: ./scripts/ensure-docker.sh" >&2
+    docker_daemon_hint
     return 1
   fi
   docker network inspect lab_net >/dev/null 2>&1 || docker network create lab_net

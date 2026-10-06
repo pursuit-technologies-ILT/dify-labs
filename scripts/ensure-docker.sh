@@ -1,13 +1,44 @@
 #!/usr/bin/env bash
-# Ensure Docker daemon is running in this sandbox (no systemd).
-# Uses vfs storage + iptables-legacy (required for container ICC here).
+# Ensure Docker daemon is running.
+# - macOS: Docker Desktop only (no sudo iptables/dockerd).
+# - Linux sandboxes without systemd: vfs storage + iptables-legacy + dockerd.
 set -euo pipefail
+
+is_macos() {
+  [[ "$(uname -s)" == "Darwin" ]]
+}
 
 ensure_bridge_icc() {
   # Nested VM: Docker bridge ICC often needs an explicit FORWARD accept
   sudo iptables -C FORWARD -j ACCEPT 2>/dev/null || sudo iptables -I FORWARD -j ACCEPT
   sudo iptables -C DOCKER-USER -j ACCEPT 2>/dev/null || sudo iptables -I DOCKER-USER -j ACCEPT 2>/dev/null || true
 }
+
+macos_docker_not_running() {
+  cat >&2 <<'EOF'
+Docker is not running.
+
+On macOS, use Docker Desktop — this lab does not start dockerd with sudo on Mac.
+
+  1. Open Docker Desktop (Applications or menu bar whale icon).
+  2. Wait until Docker Desktop reports it is running.
+  3. Run: ./scripts/up.sh
+
+If a script asks for a sudo password: enter your Mac administrator password.
+That is not COLLAB_PASSWORD (walkthrough demo gate) or any other lab secret.
+
+See: docs/runbooks/TROUBLESHOOTING-MACOS.md
+EOF
+  exit 1
+}
+
+if is_macos; then
+  if docker info >/dev/null 2>&1; then
+    echo "Using Docker Desktop ($(docker info -f '{{.ServerVersion}}'))."
+    exit 0
+  fi
+  macos_docker_not_running
+fi
 
 if docker info >/dev/null 2>&1; then
   ensure_bridge_icc

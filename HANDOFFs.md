@@ -46,10 +46,12 @@ Implementers do **not** self-SHIP; independent eval marks rows done. One integra
 cp .env.example .env
 # OPENROUTER_API_KEY=sk-or-...  (never commit .env)
 
-./scripts/ensure-docker.sh   # if Docker is not running
+# macOS: start Docker Desktop first; ./scripts/up.sh is enough (no sudo path)
 ./scripts/up.sh              # LAB_MODE=dify by default
 ./scripts/status.sh
 ```
+
+**macOS:** sudo prompts are your **Mac administrator password**, not `COLLAB_PASSWORD`. See [docs/runbooks/TROUBLESHOOTING-MACOS.md](docs/runbooks/TROUBLESHOOTING-MACOS.md). Linux sandboxes only: `./scripts/ensure-docker.sh`.
 
 | Port | Service |
 |------|---------|

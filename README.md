@@ -30,7 +30,7 @@ Studio email if Dify’s own form appears: `lab-admin@example.com` (same passwor
 cp .env.example .env
 # edit .env → OPENROUTER_API_KEY=sk-or-...
 
-./scripts/ensure-docker.sh   # sandbox / no-systemd only; skip if Docker already runs
+# macOS: Docker Desktop running → skip ensure-docker; see docs/runbooks/TROUBLESHOOTING-MACOS.md
 ./scripts/up.sh              # LAB_MODE=dify by default
 ./scripts/status.sh
 ```

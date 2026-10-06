@@ -22,10 +22,12 @@ Optional **Open WebUI** is demo-only (`LAB_MODE=full`), not the class path.
 cp .env.example .env
 # set OPENROUTER_API_KEY=sk-or-...  (never commit .env)
 
-./scripts/ensure-docker.sh   # only if Docker is not already running
+# macOS: Docker Desktop running → ./scripts/up.sh only (see TROUBLESHOOTING-MACOS)
 ./scripts/up.sh              # LAB_MODE=dify by default
 ./scripts/status.sh
 ```
+
+macOS + Docker Desktop: [runbooks/TROUBLESHOOTING-MACOS.md](./runbooks/TROUBLESHOOTING-MACOS.md). Linux no-systemd sandboxes: `./scripts/ensure-docker.sh`.
 
 Open **http://localhost:3847/install** (use **`localhost`**, not `127.0.0.1`, so Studio cookies match the API host).
 
