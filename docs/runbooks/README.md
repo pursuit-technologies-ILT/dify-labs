@@ -22,6 +22,7 @@ Module 3 also documents mock claims at **`http://127.0.0.1:3860`**.
 
 ## Related docs
 
+- [VERIFY-REPO-AND-GITHUB.md](./VERIFY-REPO-AND-GITHUB.md) — confirm correct clone, org publish, no symlink myths
 - [TROUBLESHOOTING-MACOS.md](./TROUBLESHOOTING-MACOS.md) — Docker Desktop, sudo vs `COLLAB_PASSWORD`
 - [HOW_TO_OPENROUTER_CANVAS.md](../HOW_TO_OPENROUTER_CANVAS.md) — Studio + OpenRouter
 - [DEPLOY_AND_STUDENT_TENANCY.md](../DEPLOY_AND_STUDENT_TENANCY.md) — `user=student:<id>` BFF path

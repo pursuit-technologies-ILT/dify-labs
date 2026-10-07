@@ -77,6 +77,16 @@ Other ops: `./scripts/down.sh`, `./scripts/bootstrap.sh`, `./scripts/programme-g
 
 ---
 
+## Verify before handoff
+
+Before you push to an org (for example **Pursuit Path ILT**) or send a colleague a clone URL, confirm repo identity and `main` tip:
+
+**Runbook:** [docs/runbooks/VERIFY-REPO-AND-GITHUB.md](docs/runbooks/VERIFY-REPO-AND-GITHUB.md)
+
+Minimum checks: `git remote -v`, `git fetch`, `git status`, `git log -1` → expect README `# Enterprise AI Training Lab (Dify)`, root **`HANDOFFs.md`**, commit **≥ `f53715f`**. GitHub has **no symlink between repos**—use one source of truth and `./scripts/sync-github.sh` or a second `github` remote (see below).
+
+---
+
 ## GitHub sharing (Origin + public showcase)
 
 **Canonical detail:** [docs/PUBLIC_REPO.md](docs/PUBLIC_REPO.md)
